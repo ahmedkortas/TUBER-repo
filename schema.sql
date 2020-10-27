@@ -40,11 +40,11 @@ CREATE TABLE requests(
 );
 
 
-INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(1,'Elyes','Ferjani','elyes@rbk.com','123',1995,00000001,11111,'mazerati','ariana',2,'male',10);
-INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(2,'Kais','Temimi','kais@rbk.com','123',1995,00000002,11111,'ferrari','gammarth',5,'male',10);
-INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(3,'Othman','GUE','othman@rbk.com','123',1995,00000003,11111,'audi','ariana',3,'male',10);
-INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(4,'Ali','Smaoui','ali@rbk.com','123',1995,00000004,11111,'lamborghini','sokra',7,'male',10);
-INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(5,'Skander','Khabou','skander@rbk.com','123',1995,00000005,11111,'bugatti','tunis',8,'male',10);
+INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(1,'Elyes','Ferjani','elyes@rbk.com','490501512',1995,00000001,11111,'mazerati','ariana',2,'male',10);
+INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(2,'Kais','Temimi','kais@rbk.com','490501512',1995,00000002,11111,'ferrari','gammarth',5,'male',10);
+INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(3,'Othman','GUE','othman@rbk.com','490501512',1995,00000003,11111,'audi','ariana',3,'male',10);
+INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(4,'Ali','Smaoui','ali@rbk.com','490501512',1995,00000004,11111,'lamborghini','sokra',7,'male',10);
+INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(5,'Skander','Khabou','skander@rbk.com','490501512',1995,00000005,11111,'bugatti','tunis',8,'male',10);
 
 
 INSERT INTO history(id,available,driver_id) VALUES(1,'no',1);
