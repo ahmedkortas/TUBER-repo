@@ -142,6 +142,7 @@ class User extends Component {
 
                         </GoogleMapReact>
                     </div>
+                    
                 </div>
             )
         }
