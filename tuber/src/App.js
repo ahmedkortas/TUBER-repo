@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       drivers: [],
       view: 'none',
-      overAll: 'none'
+      // overAll: 'none'
     }
   }
   componentDidMount() {
@@ -26,22 +26,36 @@ class App extends Component {
   }
   render() {
     console.log(this.state)
+    if (this.state.view === 'none') {
 
-    return (
-      <div>
-        <div className="nav">
-          <span onClick={this.changeIt}>Tuber</span>
-          <div ><span onClick={() => { this.changeView('User') }}>User</span>
-            <span onClick={() => { this.changeView('Driver') }}>Driver</span></div>
+      return (
+
+        <div>
+          <div className="nav">
+
+            <center>   <span onClick={this.changeIt}>Welcome people to Tuber</span></center><br></br>
+            <div ><span onClick={() => { this.changeView('User') }}>looking for a ride</span><br></br><br></br>
+              <span onClick={() => { this.changeView('Driver') }}>You want to be a driver</span></div>
+          </div>
+          <div >
+
+
+            {/* {this.state.overAll === "Vision" ? <div> {this.state.view === 'User'
+            ? <User drivers={this.state.drivers} />
+            : <Driver />
+          }</div> : <div> </div>} */}
+
+          </div>
         </div>
-        <div >{this.state.overAll === "Vision" ? <div> {this.state.view === 'User'
-          ? <User drivers={this.state.drivers} />
-          : <Driver />
-        }</div> : <div> </div>}
-        
-        </div>
-      </div>
-    )
+      )
+    }
+    if (this.state.view === 'User') {
+      return (<User drivers={this.state.drivers} />)
+    }
+    else if (this.state.view === 'Driver') {
+      return (<Driver />)
+
+    }
   }
 }
 export default App;

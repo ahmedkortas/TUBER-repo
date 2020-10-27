@@ -54,7 +54,12 @@ class User extends Component {
         zoom: 11
     };
     render() {
-        if (this.state.check === '') {
+        if (this.state.check === 'home') {
+            return (
+                <App />
+            )
+        }
+        else if (this.state.check === '') {
             return (
                 <div>
                     <button onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br>
@@ -129,11 +134,7 @@ class User extends Component {
                 </div>
             )
         }
-        else if (this.state.check === 'home') {
-            return (
-                <App />
-            )
-        }
+
     }
 }
 
