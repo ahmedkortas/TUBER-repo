@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import User from './Components/User.jsx';
 import Driver from './Components/Driver.jsx';
-const axios = require('axios')
+import axios from 'axios'
 
 
 class App extends Component{

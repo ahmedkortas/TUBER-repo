@@ -1,4 +1,5 @@
 import React, {Component } from 'react';
+// import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-map-react';
 
 class User extends Component{
     constructor(props){
@@ -9,7 +10,7 @@ class User extends Component{
       this.available = this.available.bind(this);
     }
     available(e){
-        const filtered = this.props.drivers.filter(driver=>{return(driver.location === e.target.value)});
+        const filtered = this.props.drivers.filter(driver=>{return(driver.location.toLowerCase() === e.target.value)});
         this.setState({currentDrivers: filtered})
         console.log(filtered)
     }
@@ -55,7 +56,20 @@ render(){
                     )})}
                 </ul>
             </div>
+            {/* <div style={{ height: '40vh', width: '50vw' }}>
+            <Map google={this.props.google} initialCenter={{lat: 40.854885,lng: -88.081807}} zoom={14}>
+ 
+            <Marker onClick={this.onMarkerClick}
+            name={'Current location'} />
+
+            <InfoWindow onClose={this.onInfoWindowClose}>
+            </InfoWindow>
+            </Map>
+            </div> */}
         </div>
     )
 }}
+// export default GoogleApiWrapper({
+//     apiKey: ("AIzaSyA0ldEuZXZKJuPmYI5b0YsWnueNgL7t0OE")
+//   })(User)
 export default User;
