@@ -96,7 +96,6 @@ router.post("/history", (req, res) => {
 router.post('/status',(req,res)=>{
   let emailDriver = req.body.email;
   let info = req.body.info;
-  console.log(info)
   db.getInfo(emailDriver,info,(err,result)=>{
     if(err){
       console.log(err)
@@ -105,6 +104,33 @@ router.post('/status',(req,res)=>{
     }
   })
 
+});
+
+router.post('/request',(req,res)=>{
+  let emailPicker = req.body.email;
+  let request = req.body.request;
+  if(!req.body.answer){
+  db.submitReq(request,emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+        console.log('waiting for answer')
+    }
+  })
+  }else{
+    res.status(200).json(req.body.answer)
+  }
+})
+
+router.post('/requests/answer',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.getAllReq(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.status(200).json(result)
+    }
+  })
 })
 
 module.exports = router;

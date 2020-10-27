@@ -11,11 +11,24 @@ class Informations extends Component {
             data: {},
             status: '',
             boolean: true,
-            answer: ''
+            answer: '',
+            requests: []
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
-        this.handleAvail = this.handleAvail.bind(this)
+        this.handleAvail = this.handleAvail.bind(this);
+        this.refresh = this.refresh.bind(this);
+        this.confirmLift = this.confirmLift.bind(this)
+    }
+    confirmLift(){
+        const answer = 'ok';
+        axios.post('http://localhost:5000/drivers/request',{answer: answer})
+        .then(res=>{console.log(res.data)})
+    }
+    refresh(){
+        const emailPicker = this.props.email
+        axios.post('http://localhost:5000/drivers/requests/answer',{email: emailPicker})
+        .then(res=>{this.setState({requests: res.data})})
     }
     async handleAvail(){
         let info = ''
@@ -30,7 +43,7 @@ class Informations extends Component {
       await  axios.post('http://localhost:5000/drivers/status',{email: email, info: info})
         .then(res=>{
             if(res.data.affectedRow !== 0){
-                this.setState({status: info})}})        
+                this.setState({status: info})}})  
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -38,7 +51,6 @@ class Informations extends Component {
         this.setState({answer: this.props.request})
         console.log(this.state)
     }
-
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
     }
@@ -58,6 +70,17 @@ class Informations extends Component {
         return (
             <div>
                  <button onClick={this.handleAvail}>Availability</button>
+                 <button onClick={this.refresh}>refresh requests</button>
+                 <ul>
+                     {this.state.requests.map(req=>{
+                         return(
+                             <li key={req.id}>
+                                 {req.request}
+                                 <button onClick={this.confirmLift}>Accept</button>
+                             </li>
+                         )
+                     })}
+                 </ul>
                  <div>
                      {this.props.request}
                  </div>

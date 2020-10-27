@@ -11,7 +11,8 @@ class User extends Component {
             currentDrivers: [],
             chairs: 1,
             data: {},
-            check: ''
+            check: '',
+            answer: ''
 
         }
         this.available = this.available.bind(this);
@@ -21,9 +22,9 @@ class User extends Component {
         this.goHome = this.goHome.bind(this);
     }
    async sendRequest(e){
-      await  Axios.post('http://localhost:5000/drivers/request',{name: e, request: 'pick me up?'})
+      await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?'})
         .then(res=>{
-            console.log(res)
+            this.setState({answer: res.data})
         })
     }
     available(e) {
@@ -118,7 +119,7 @@ class User extends Component {
                                             {driver.rate}
                                         </div>
                                         <div>
-                                            <button onClick={()=>{this.sendRequest(driver.firstName)}}>Request A Tuber</button>
+                                            <button onClick={()=>{this.sendRequest(driver.email)}}>Request A Tuber</button>
                                         </div>
                                     </li>
                                 )
