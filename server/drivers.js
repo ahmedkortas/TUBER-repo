@@ -91,11 +91,13 @@ router.post("/history", (req, res) => {
   });
 });
 
-// POST REQUEST TO GET POSITION 
+// POST REQUEST TO UPDATE STATUS 
 
-router.post('/position',(req,res)=>{
+router.post('/status',(req,res)=>{
   let emailDriver = req.body.email;
-  db.getPosition(emailDriver,(err,result)=>{
+  let info = req.body.info;
+  console.log(info)
+  db.getInfo(emailDriver,info,(err,result)=>{
     if(err){
       console.log(err)
     }else{

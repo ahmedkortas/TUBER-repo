@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import axios from 'axios';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class Informations extends Component {
@@ -8,9 +9,26 @@ class Informations extends Component {
         this.state = {
             something: [],
             data: {},
+            status: '',
+            boolean: true
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
+        this.handleAvail = this.handleAvail.bind(this)
+    }
+    async handleAvail(){
+        let info = ''
+       await this.setState({boolean: !this.state.boolean})
+        if(this.state.boolean === true){
+             info = 'yes'
+        }else{
+             info = 'no'
+        }
+        const email = this.props.email;
+        console.log(info,email)
+      await  axios.post('http://localhost:5000/drivers/status',{email: email, info: info})
+        .then(res=>{this.setState(console.log(res.data))})
+        console.log(this.state)
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -35,6 +53,7 @@ class Informations extends Component {
     render() {
         return (
             <div>
+                 <button onClick={this.handleAvail}>Availability</button>
                 <div style={{ height: '50vh', width: '50%' }}>
                     <GoogleMapReact
                         // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
