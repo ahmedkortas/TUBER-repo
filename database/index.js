@@ -67,8 +67,8 @@ const getHistory = (driver_id,callback)=>{
       }
     });
 }
-const createHistory = (longtitude, lattitude)=>{
-    let syntax = `INSERT INTO history(longitude, lattitude) VALUES ("${longtitude}","${lattitude}")`
+const createHistory = (longtitude, lattitude, firstName, callback)=>{
+    let syntax = `INSERT INTO history(longitude, lattitude,driver_id) VALUES ("${longtitude}","${lattitude}",(SELECT id FROM drivers WHERE name='${firstName}'))`
     connection.query(syntax, (err, result) => {
       if (err) {
         callback(err, null);

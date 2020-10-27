@@ -50,6 +50,30 @@ router.post('/signin', (req, res) => {
         }
     })
 })
+router.post('/history/add', (req,res) => {
+    const longtitude = req.body.longtitude;
+    const lattitude = req.body.lattitude;
+    db.createHistory(longtitude, lattitude, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            console.log('done')
+        }
+    })
+})
+
+router.post('/history', (req,res) => {
+    const firstNameDrive = req.body.firstNameDrive;
+    db.getHistory(firstNameDrive, (err, result) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.status(200).json(result)
+        }
+    })
+})
+
+
 
 
 module.exports = router;
