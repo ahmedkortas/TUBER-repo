@@ -23,6 +23,16 @@ CREATE TABLE drivers(
     PRIMARY KEY (ID)
 );
 
+CREATE TABLE history (
+    id int NOT NULL AUTO_INCREMENT,
+    longtitude decimal(20,5) NOT NULL,
+    lattitude decimal(20,5) NOT NULL,
+    driver_id int NOT NULL,
+     PRIMARY KEY(ID),
+     CONSTRAINT FK_driverID FOREIGN KEY (driver_id) References drivers(id)
+
+)
+
 INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(1,'Elyes','Ferjani','elyes@rbk.com','123',1995,00000001,11111,'mazerati','ariana',2,'male',10);
 INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(2,'Kais','Temimi','kais@rbk.com','123',1995,00000002,11111,'ferrari','gammarth',5,'male',10);
 INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(4,'Othman','GUE','othman@rbk.com','123',1995,00000003,11111,'audi','ariana',3,'male',10);
