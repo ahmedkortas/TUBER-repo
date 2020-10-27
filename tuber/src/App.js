@@ -23,10 +23,10 @@ goDriver (event){
     return (
       <div>
        <center> <h1>Welcome people to Tuber</h1></center>
-       <div>
+      <center><div>
        <button onClick={(event)=>{this.goCustomer(event)}}>looking for a ride</button>
        <button onClick={(event)=>{this.goDriver(event)}}>You want to be a driver</button>
-       </div>
+       </div></center> 
       </div>
     )
   }
