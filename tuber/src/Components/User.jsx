@@ -25,6 +25,7 @@ render(){
                       <option >tunis</option>
                       <option >gammarth</option>
                       <option >sokra</option>
+                      <option >wed lil</option>
                 </select>
             </div>
             <div>
