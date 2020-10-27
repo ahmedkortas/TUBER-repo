@@ -104,7 +104,5 @@ class User extends Component {
         )
     }
 }
-// export default GoogleApiWrapper({
-//     apiKey: ("AIzaSyA0ldEuZXZKJuPmYI5b0YsWnueNgL7t0OE")
-//   })(User)
+
 export default User;

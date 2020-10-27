@@ -91,4 +91,18 @@ router.post("/history", (req, res) => {
   });
 });
 
+// POST REQUEST TO GET POSITION 
+
+router.post('/position',(req,res)=>{
+  let emailDriver = req.body.email;
+  db.getPosition(emailDriver,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.status(200).json(result)
+    }
+  })
+
+})
+
 module.exports = router;

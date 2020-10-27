@@ -91,6 +91,20 @@ const createHistory = (longtitude, lattitude, idCard, callback) => {
     }
   });
 };
+// GETTING A PREVIEW POSITION FOR THE ONLINE DRIVERS
+const getPosition = (email, callback) => {
+  let syntax = `SELECT * FROM history WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+// INSERTING THE CURRENT POSITION  OF DRIVER
+
 
 module.exports.getAllDrivers = getAllDrivers;
 module.exports.addNewDriver = addNewDriver;
@@ -98,3 +112,4 @@ module.exports.getADriver = getADriver;
 module.exports.getEmailAndPassword = getEmailAndPassword;
 module.exports.getHistory = getHistory;
 module.exports.createHistory = createHistory;
+module.exports.getPosition = getPosition;
