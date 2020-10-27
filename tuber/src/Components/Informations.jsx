@@ -10,7 +10,8 @@ class Informations extends Component {
             something: [],
             data: {},
             status: '',
-            boolean: true
+            boolean: true,
+            answer: ''
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
@@ -34,6 +35,8 @@ class Informations extends Component {
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
+        this.setState({answer: this.props.request})
+        console.log(this.state)
     }
 
     setIntervalFunc() {
@@ -55,6 +58,9 @@ class Informations extends Component {
         return (
             <div>
                  <button onClick={this.handleAvail}>Availability</button>
+                 <div>
+                     {this.props.request}
+                 </div>
                 <div style={{ height: '50vh', width: '50%' }}>
                     <GoogleMapReact
                         // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}

@@ -49,7 +49,7 @@ class User extends Component {
                         <h3>Already registred?</h3><h4 onClick={this.changeView}>Go back</h4></div>}
                 </div>
                 {!this.state.visible && <div>
-                    <Informations email={this.state.email}/>
+                    <Informations email={this.state.email} request={this.props.request}/>
                 </div>}
             </div>
         )

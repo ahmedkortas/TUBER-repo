@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import App from '../App.js';
+import Axios from 'axios';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class User extends Component {
@@ -18,6 +19,12 @@ class User extends Component {
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.availableChairs = this.availableChairs.bind(this);
         this.goHome = this.goHome.bind(this);
+    }
+   async sendRequest(e){
+      await  Axios.post('http://localhost:5000/drivers/request',{name: e, request: 'pick me up?'})
+        .then(res=>{
+            console.log(res)
+        })
     }
     available(e) {
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
@@ -69,8 +76,8 @@ class User extends Component {
                             <option ></option>
                             <option >1</option>
                             <option >2</option>
-                            <option >2</option>
                             <option >3</option>
+                            <option >4</option>
                         </select>
                     </div>
                     <div>
@@ -109,6 +116,9 @@ class User extends Component {
                                         </div>
                                         <div>rate: <br />
                                             {driver.rate}
+                                        </div>
+                                        <div>
+                                            <button onClick={()=>{this.sendRequest(driver.firstName)}}>Request A Tuber</button>
                                         </div>
                                     </li>
                                 )
