@@ -7,17 +7,23 @@ class User extends Component {
         super(props);
         this.state = {
             currentDrivers: [],
+            chairs: 1,
             data: {},
 
         }
         this.available = this.available.bind(this);
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
+        this.availableChairs = this.availableChairs.bind(this)
     }
     available(e) {
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
+        console.log(this.state)
+    }
+    availableChairs(e) {
+        this.setState({ chairs: e.target.value })
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -42,6 +48,16 @@ class User extends Component {
     render() {
         return (
             <div>
+                <div>
+                    <h3>Select Number Of Pasangers: </h3>
+                    <select onChange={this.availableChairs}>
+                        <option ></option>
+                        <option >1</option>
+                        <option >2</option>
+                        <option >2</option>
+                        <option >3</option>
+                    </select>
+                </div>
                 <div>
                     <h3>Select Area: </h3>
                     <select onChange={this.available}>
@@ -94,7 +110,7 @@ class User extends Component {
                             this.state.data && <AnyReactComponent
                                 lat={this.state.data.latitude}
                                 lng={this.state.data.longitude}
-                                text="My Marker"
+                                text="Client"
                             />
                         }
 
