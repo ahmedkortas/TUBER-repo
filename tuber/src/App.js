@@ -1,49 +1,45 @@
-import React, { Component } from 'react'
-import Customer from './Customer.js'
-import Driver from './Driver.js'
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      check:''
+import React, { Component } from 'react';
+import User from './Components/User.jsx';
+import Driver from './Components/Driver.jsx';
+import axios from 'axios'
+
+
+class App extends Component{
+    constructor(props){
+      super(props)
+      this.state={
+        drivers: [],
+        view: 'none',
+        overAll: 'none'
+      }
     }
-    this.goCustomer=this.goCustomer.bind(this);
-    this.goDriver=this.goDriver.bind(this);
+  componentDidMount(){
+     axios.get('http://localhost:5000/users')
+     .then(res=>{ this.setState({drivers: res.data})})
+     console.log(this.state)
   }
-goCustomer(event){
-  event.preventDefault();
-  this.setState({check:'customer'})
+  changeView(option){
+  this.setState({
+  view: option,
+  overAll: 'Vision'
+  })
 }
-goDriver (event){
-  event.preventDefault();
-  this.setState({check : 'driver'})
-}
-  render() {
-    if(this.state.check === ''){
-    return (
-      <div>
-       <center> <h1>Welcome people to Tuber</h1></center>
-       <div>
-       <button onClick={(event)=>{this.goCustomer(event)}}>looking for a ride</button>
-       <button onClick={(event)=>{this.goDriver(event)}}>You want to be a driver</button>
-       </div>
+  render(){
+    console.log(this.state)
+    return(
+      <div> 
+        <div className="nav">
+        <span  onClick={this.changeIt}>Tuber</span>
+        <div ><span onClick={()=>{this.changeView('User')}}>User</span>
+        <span  onClick={()=>{this.changeView('Driver')}}>Driver</span></div>
+        </div>
+        <div >{this.state.overAll === "Vision" ? <div> {this.state.view === 'User'
+        ? <User drivers={this.state.drivers} />
+        : <Driver  />
+        }</div>  : <div> </div>}
+      </div>
       </div>
     )
   }
-  else if (this.state.check === 'customer'){
-return(
- 
-<Customer />
-
-)
-  }
-  else if(this.state.check === 'driver'){
-    return(
-      <Driver />
-    )
-  }
-
-  
-  }
 }
-
+export default App;

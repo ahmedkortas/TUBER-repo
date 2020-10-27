@@ -7,7 +7,7 @@ To Start React Server:
 
 To Start Nodemon Server:
 
-==> npm server
+==> npm run server
 
 To Initialize The Schema:
 
