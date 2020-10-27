@@ -93,7 +93,7 @@ const createHistory = (longtitude, lattitude, idCard, callback) => {
 };
 // GETTING A PREVIEW POSITION FOR THE ONLINE DRIVERS
 const getInfo = (email,info, callback) => {
-  let syntax = ` UPDATE history SET availability = '${info}' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
+  let syntax = ` UPDATE history SET available = '${info}' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
     if (err) {
       callback(err, null);

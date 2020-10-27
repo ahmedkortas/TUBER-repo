@@ -25,7 +25,7 @@ CREATE TABLE drivers(
 
 CREATE TABLE history (
     id int NOT NULL AUTO_INCREMENT,
-    availability varcahr(20) NOT NULL,
+    available varchar(20) NOT NULL,
     driver_id int NOT NULL,
      PRIMARY KEY(ID),
      CONSTRAINT FK_driverID FOREIGN KEY (driver_id) References drivers(id)
@@ -40,8 +40,8 @@ INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driv
 INSERT INTO drivers(id,firstName,lastName,email,password,yearOfBirth,idCard,driveLicense,car,location,km,gender,rate) VALUES(5,'Skander','Khabou','skander@rbk.com','123',1995,00000005,11111,'bugatti','tunis',8,'male',10);
 
 
-INSERT INTO history(id,availability,driver_id) VALUES(1,'no',1);
-INSERT INTO history(id,availability,driver_id) VALUES(2,'no',2);
-INSERT INTO history(id,availability,driver_id) VALUES(3,'no',3);
-INSERT INTO history(id,availability,driver_id) VALUES(4,'no',4);
-INSERT INTO history(id,availability,driver_id) VALUES(5,'no',5);
+INSERT INTO history(id,available,driver_id) VALUES(1,'no',1);
+INSERT INTO history(id,available,driver_id) VALUES(2,'no',2);
+INSERT INTO history(id,available,driver_id) VALUES(3,'no',3);
+INSERT INTO history(id,available,driver_id) VALUES(4,'no',4);
+INSERT INTO history(id,available,driver_id) VALUES(5,'no',5);

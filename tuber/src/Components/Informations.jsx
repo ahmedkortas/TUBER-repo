@@ -25,10 +25,11 @@ class Informations extends Component {
              info = 'no'
         }
         const email = this.props.email;
-        console.log(info,email)
+        console.log(info,email,this.state)
       await  axios.post('http://localhost:5000/drivers/status',{email: email, info: info})
-        .then(res=>{this.setState(console.log(res.data))})
-        console.log(this.state)
+        .then(res=>{
+            if(res.data.affectedRow !== 0){
+                this.setState({status: info})}})        
     }
     // map refresh when component mounts
     componentDidMount() {
