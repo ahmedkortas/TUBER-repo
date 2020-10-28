@@ -1,49 +1,61 @@
-import React, { Component } from 'react'
-import Customer from './Customer.js'
-import Driver from './Driver.js'
-export default class App extends Component {
+import React, { Component } from 'react';
+import User from './Components/User.jsx';
+import Driver from './Components/Driver.jsx';
+import axios from 'axios'
+
+
+class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      check:''
+      drivers: [],
+      view: 'none',
+      // overAll: 'none'
     }
-    this.goCustomer=this.goCustomer.bind(this);
-    this.goDriver=this.goDriver.bind(this);
   }
-goCustomer(event){
-  event.preventDefault();
-  this.setState({check:'customer'})
-}
-goDriver (event){
-  event.preventDefault();
-  this.setState({check : 'driver'})
-}
+  componentDidMount() {
+    axios.get('http://localhost:5000/users')
+      .then(res => { this.setState({ drivers: res.data }) })
+    console.log(this.state)
+  }
+  changeView(option) {
+    this.setState({
+      view: option,
+      overAll: 'Vision'
+    })
+  }
   render() {
-    if(this.state.check === ''){
-    return (
-      <div>
-       <center> <h1>Welcome people to Tuber</h1></center>
-      <center><div>
-       <button onClick={(event)=>{this.goCustomer(event)}}>looking for a ride</button>
-       <button onClick={(event)=>{this.goDriver(event)}}>You want to be a driver</button>
-       </div></center> 
-      </div>
-    )
-  }
-  else if (this.state.check === 'customer'){
-return(
- 
-<Customer />
+    console.log(this.state)
+    if (this.state.view === 'none') {
 
-)
-  }
-  else if(this.state.check === 'driver'){
-    return(
-      <Driver />
-    )
-  }
+      return (
 
-  
+        <div>
+          <div className="nav">
+
+            <center>   <span onClick={this.changeIt}>Welcome people to Tuber</span></center><br></br>
+            <div ><span onClick={() => { this.changeView('User') }}>looking for a ride</span><br></br><br></br>
+              <span onClick={() => { this.changeView('Driver') }}>You want to be a driver</span></div>
+          </div>
+          <div >
+
+
+            {/* {this.state.overAll === "Vision" ? <div> {this.state.view === 'User'
+            ? <User drivers={this.state.drivers} />
+            : <Driver />
+          }</div> : <div> </div>} */}
+
+          </div>
+        </div>
+      )
+    }
+    if (this.state.view === 'User') {
+      return (<User drivers={this.state.drivers} />)
+    }
+    else if (this.state.view === 'Driver') {
+      return (<Driver />)
+
+    }
   }
 }
-
+export default App;
