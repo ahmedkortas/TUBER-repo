@@ -12,7 +12,8 @@ class User extends Component {
             chairs: 1,
             data: {},
             check: '',
-            answer: ''
+            answer: '',
+            email: ''
 
         }
         this.available = this.available.bind(this);
@@ -20,14 +21,28 @@ class User extends Component {
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.availableChairs = this.availableChairs.bind(this);
         this.goHome = this.goHome.bind(this);
+        this.checkRes = this.checkRes.bind(this)
+    }
+    checkRes(){
+        Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
+        .then(res=>{
+            this.setState({answer:res.data[0].available})
+            if(this.state.answer === 'ok'){
+               alert('request accepted')
+               Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
+               .then(console.log('request updated'))
+            }
+        })
     }
    async sendRequest(e){
+    this.setState({email: e})
       await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?'})
         .then(res=>{
-            this.setState({answer: res.data})
+            console.log('request sent')
         })
     }
     available(e) {
+        
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
@@ -126,6 +141,7 @@ class User extends Component {
                             })}
                         </ul>
                     </div>
+                    <button onClick={this.checkRes}>Check Response</button>
                     <div style={{ height: '50vh', width: '50%' }}>
                         <GoogleMapReact
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}

@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "1995elyesferjani",
+  password: "root",
   database: "tuber",
   insecureAuth: true,
 });
@@ -103,6 +103,17 @@ const getInfo = (email,info, callback) => {
   });
 };
 
+const getAllInfo = (email, callback) => {
+  let syntax = `SELECT available FROM history WHERE driver_id=(SELECT id FROM drivers WHERE email='${email}')`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
 //
 const submitReq = (request,email, callback) => {
   let syntax = ` INSERT INTO requests(request, picker_id) VALUES('${request}',(SELECT id FROM drivers WHERE email= '${email}'))`;
@@ -116,7 +127,29 @@ const submitReq = (request,email, callback) => {
 };
 
 const getAllReq = (emailPicker, callback) => {
-  let syntax = `SELECT * FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email= '${emailPicker}')`;
+  let syntax = `SELECT request FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+const updateReq = (answer,emailPicker, callback) => {
+  let syntax = `UPDATE requests SET request = '${answer}' WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+const updateInfoRes = (email, callback) => {
+  let syntax = ` UPDATE history SET available = 'no' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
     if (err) {
       callback(err, null);
@@ -136,3 +169,6 @@ module.exports.createHistory = createHistory;
 module.exports.getInfo = getInfo;
 module.exports.submitReq = submitReq;
 module.exports.getAllReq = getAllReq;
+module.exports.updateReq = updateReq;
+module.exports.getAllInfo = getAllInfo;
+module.exports.updateInfoRes = updateInfoRes;

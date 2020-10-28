@@ -21,14 +21,16 @@ class Informations extends Component {
         this.confirmLift = this.confirmLift.bind(this)
     }
     confirmLift(){
+        const email1 = this.props.email;
         const answer = 'ok';
-        axios.post('http://localhost:5000/drivers/request',{answer: answer})
+        axios.post('http://localhost:5000/drivers/request',{answer: answer ,email:email1})
         .then(res=>{console.log(res.data)})
     }
     refresh(){
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer',{email: emailPicker})
         .then(res=>{this.setState({requests: res.data})})
+        console.log(this.state)
     }
     async handleAvail(){
         let info = ''
@@ -49,7 +51,7 @@ class Informations extends Component {
     componentDidMount() {
         this.setIntervalFunc()
         this.setState({answer: this.props.request})
-        console.log(this.state)
+        
     }
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
