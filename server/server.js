@@ -15,5 +15,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/users', users);
 app.use('/drivers', drivers);
 
-
 app.listen(port,()=>{console.log(`Connected to ${port}`)})
