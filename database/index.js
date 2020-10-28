@@ -3,10 +3,11 @@ const mysql = require("mysql");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "1995elyesferjani",
+  password: "root",
   database: "tuber",
   insecureAuth: true,
 });
+
 
 connection.connect((err) => {
   if (err) throw err;
@@ -92,7 +93,7 @@ const createHistory = (longtitude, lattitude, idCard, callback) => {
   });
 };
 // GETTING A PREVIEW POSITION FOR THE ONLINE DRIVERS
-const getInfo = (email,info, callback) => {
+const getInfo = (email, info, callback) => {
   let syntax = ` UPDATE history SET available = '${info}' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
     if (err) {
@@ -104,7 +105,7 @@ const getInfo = (email,info, callback) => {
 };
 
 //
-const submitReq = (request,email, callback) => {
+const submitReq = (request, email, callback) => {
   let syntax = ` INSERT INTO requests(request, picker_id) VALUES('${request}',(SELECT id FROM drivers WHERE email= '${email}'))`;
   connection.query(syntax, (err, result) => {
     if (err) {
