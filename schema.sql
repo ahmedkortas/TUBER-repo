@@ -34,6 +34,8 @@ CREATE TABLE history (
 CREATE TABLE requests(
     id int NOT NULL AUTO_INCREMENT,
     request varchar(20),
+    x REAL ,
+    y REAL ,
     picker_id int NOT NULL,
     PRIMARY KEY(ID),
     CONSTRAINT FK_pickerID FOREIGN KEY (picker_id) References drivers(id)

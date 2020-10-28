@@ -108,10 +108,13 @@ router.post('/status',(req,res)=>{
 });
 
 router.post('/request',(req,res)=>{
-  let emailPicker = req.body.email;
+  var emailPicker = req.body.email;
   let request = req.body.request;
+  let lat = req.body.lat;
+  let long = req.body.long;
+  console.log(lat,long)
   if(!req.body.answer){
-  db.submitReq(request,emailPicker,(err,result)=>{
+  db.submitReq(request,lat,long,emailPicker,(err,result)=>{
     if(err){
       console.log(err)
     }else{
@@ -119,7 +122,23 @@ router.post('/request',(req,res)=>{
     }
   })
   }else{
-    res.status(200).json(req.body.answer)
+    console.log(req.body.answer)
+    console.log(emailPicker)
+    db.getInfo(emailPicker,req.body.answer,(err,result)=>{
+      console.log(req.body.email)
+      if(err){
+        console.log(err)
+      }else{
+        console.log(result)
+        db.getAllInfo(emailPicker,(err,result)=>{
+          if(err){
+            console.log(err)
+          }else{
+            res.status(200).json(result)
+          }
+        })
+      }
+    })
   }
 })
 
@@ -132,6 +151,29 @@ router.post('/requests/answer',(req,res)=>{
       res.status(200).json(result)
     }
   })
-})
+});
+
+router.post('/request/response',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.getAllInfo(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.status(200).json(result)
+    }
+  })
+});
+
+router.post('/request/response/update',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.updateInfoRes(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+});
+
 
 module.exports = router;
