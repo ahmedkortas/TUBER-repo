@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
+  password: "1995elyesferjani",
   database: "tuber",
   insecureAuth: true,
 });
@@ -103,7 +103,28 @@ const getInfo = (email,info, callback) => {
   });
 };
 
-// INSERTING THE CURRENT POSITION  OF DRIVER
+//
+const submitReq = (request,email, callback) => {
+  let syntax = ` INSERT INTO requests(request, picker_id) VALUES('${request}',(SELECT id FROM drivers WHERE email= '${email}'))`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
+
+const getAllReq = (emailPicker, callback) => {
+  let syntax = `SELECT * FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email= '${emailPicker}')`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+};
 
 
 module.exports.getAllDrivers = getAllDrivers;
@@ -113,3 +134,5 @@ module.exports.getEmailAndPassword = getEmailAndPassword;
 module.exports.getHistory = getHistory;
 module.exports.createHistory = createHistory;
 module.exports.getInfo = getInfo;
+module.exports.submitReq = submitReq;
+module.exports.getAllReq = getAllReq;
