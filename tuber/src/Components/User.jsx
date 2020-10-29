@@ -3,7 +3,8 @@ import GoogleMapReact from 'google-map-react';
 import App from '../App.js';
 import Axios from 'axios';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{background: 'red', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
+const AnyReactComponents = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
 class User extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,7 @@ class User extends Component {
             email: '',
             lat: 0,
             long: 0,
+            name: 'Me',
             driverData: []
 
         }
@@ -24,7 +26,8 @@ class User extends Component {
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.availableChairs = this.availableChairs.bind(this);
         this.goHome = this.goHome.bind(this);
-        this.checkRes = this.checkRes.bind(this)
+        this.checkRes = this.checkRes.bind(this);
+        this.boucle = this.boucle.bind(this)
     }
     checkRes(){
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
@@ -46,20 +49,37 @@ class User extends Component {
         })
     }
    async available(e) {
-        
+        const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
         const latt = [];
-        const long = [];
+        const longg = [];
         let arr = []
         for(let i =0; i<filtered.length; i++){
             // latt.push(filtered[i].latt)
             // long.push(filtered[i].longi)
             arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
+            arr.unshift({name:'Me', lat: lat,long: long})
         }
        await this.setState({driverData: arr})
-        console.log(this.state)
+        
+            this.boucle(arr,1)
+        console.log(this.state.driverData)
+    }
+    boucle(arr,i=1){
+               this.setState({lat: arr[i].lat, long:arr[i].long , name: arr[i].name})
+             setTimeout(() => {
+                    i = i +1
+                    if(i < arr.length){ 
+                        this.boucle(arr,i)
+                    }
+                     if(i === (arr.length )){
+                         i =1
+                         this.boucle(arr,i)
+                     }
+             }, 3000);
+
     }
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
@@ -87,7 +107,7 @@ class User extends Component {
     static defaultProps = {
         center: {
             lat: 36.94592,
-            lng: 10.1711872
+            lng:  10.1711872
         },
         zoom: 11
     };
@@ -165,21 +185,11 @@ class User extends Component {
                         >
                             {
                                 this.state.data && <AnyReactComponent
-                                    lat={this.state.data.latitude}
-                                    lng={this.state.data.longitude}
-                                    text="Client"
+                                    lat={this.state.lat}
+                                    lng={this.state.long}
+                                    text={this.state.name}
                                 />
                             }
-                            {
-                                this.state.driverData && this.state.driverData.map(coors=>{ return(
-                                <AnyReactComponent
-                                    lat={coors.latt}
-                                    lng={coors.long}
-                                    text={coors.name}
-                                />)})
-                            }
-
-
                         </GoogleMapReact>
                     </div>
                     

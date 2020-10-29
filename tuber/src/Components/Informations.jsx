@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
 class Informations extends Component {
     constructor(props) {
         super(props);
@@ -15,24 +15,41 @@ class Informations extends Component {
             answer: '',
             requests: [],
             lat: 0,
-            long: 0
+            long: 0,
+            display: {name: '', long: 0, lat: 0}
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.handleAvail = this.handleAvail.bind(this);
         this.refresh = this.refresh.bind(this);
         this.confirmLift = this.confirmLift.bind(this);
+        this.boucle = this.boucle.bind(this);
     }
     confirmLift() {
         const email1 = this.props.email;
         const answer = 'ok';
         axios.post('http://localhost:5000/drivers/request', { answer: answer, email: email1 })
     }
+    boucle(i=0){
+      setTimeout(() => {
+             if(i === 0){ 
+                this.setState({display : {name: 'Me', long: this.state.data.longitude, lat: this.state.data.latitude}});
+                 this.boucle(1)
+             }
+              if(i === 1){
+                this.setState({display :{name: 'Client', long: this.state.requests.y, lat: this.state.requests.x}})
+                  this.boucle(0)
+              }
+      }, 3000);
+
+}
     refresh() {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
             console.log(this.state.requests)
+
+            this.boucle(0)
     }
     async handleAvail() {
         let info = ''
@@ -101,23 +118,13 @@ class Informations extends Component {
                     >
 
                         {
-                            this.state.data && <AnyReactComponent
-                                lat={this.state.data.latitude}
-                                lng={this.state.data.longitude}
-                                text="Driver"
+                            this.state.display && <AnyReactComponent
+                                lat={this.state.display.lat}
+                                lng={this.state.display.long}
+                                text={this.state.display.name}
                             />
 
                         }
-                        {
-                                requests &&
-                                <AnyReactComponent
-                                    lat={requests.x}
-                                    lng={requests.y}
-                                    text="Client"
-                                />
-                            }
-
-
                     </GoogleMapReact>
                 </div>
             </div>
