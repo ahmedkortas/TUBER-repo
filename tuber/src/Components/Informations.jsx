@@ -32,6 +32,7 @@ class Informations extends Component {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
+            console.log(this.state.requests)
     }
     async handleAvail() {
         let info = ''
@@ -73,6 +74,7 @@ class Informations extends Component {
         zoom: 11
     };
     render() {
+        const {requests} = this.state
         return (
             <div>
                 <button onClick={this.handleAvail}>Availability</button>
@@ -106,6 +108,14 @@ class Informations extends Component {
                             />
 
                         }
+                        {
+                                requests &&
+                                <AnyReactComponent
+                                    lat={requests.x}
+                                    lng={requests.y}
+                                    text="Client"
+                                />
+                            }
 
 
                     </GoogleMapReact>
