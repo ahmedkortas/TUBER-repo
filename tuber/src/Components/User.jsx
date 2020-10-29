@@ -16,8 +16,7 @@ class User extends Component {
             email: '',
             lat: 0,
             long: 0,
-            driverLat: [],
-            driverLong: []
+            driverData: []
 
         }
         this.available = this.available.bind(this);
@@ -46,18 +45,20 @@ class User extends Component {
             console.log('request sent')
         })
     }
-    available(e) {
+   async available(e) {
         
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
         const latt = [];
         const long = [];
+        let arr = []
         for(let i =0; i<filtered.length; i++){
-            latt.push(filtered[i].latt)
-            long.push(filtered[i].longi)
+            // latt.push(filtered[i].latt)
+            // long.push(filtered[i].longi)
+            arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
         }
-        this.setState({driverLat: latt, driverLong: long})
+       await this.setState({driverData: arr})
         console.log(this.state)
     }
     availableChairs(e) {
@@ -169,6 +170,15 @@ class User extends Component {
                                     text="Client"
                                 />
                             }
+                            {
+                                this.state.driverData && this.state.driverData.map(coors=>{ return(
+                                <AnyReactComponent
+                                    lat={coors.latt}
+                                    lng={coors.long}
+                                    text={coors.name}
+                                />)})
+                            }
+
 
                         </GoogleMapReact>
                     </div>
