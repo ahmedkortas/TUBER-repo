@@ -16,7 +16,6 @@ class App extends Component {
   componentDidMount() {
     axios.get('http://localhost:5000/users')
       .then(res => { this.setState({ drivers: res.data }) })
-    console.log(this.state)
   }
   changeView(option) {
     this.setState({

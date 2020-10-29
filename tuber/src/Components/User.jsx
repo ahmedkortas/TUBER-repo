@@ -18,7 +18,8 @@ class User extends Component {
             lat: 36.88563,
             long: 10.1840075,
             name: 'Me',
-            driverData: []
+            driverData: [],
+            end: false
 
         }
         this.available = this.available.bind(this);
@@ -33,7 +34,7 @@ class User extends Component {
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
         .then(res=>{
             console.log(res.data)
-            if(this.state.answer === 'ok'){
+            if(res.data[0].available === 'ok'){
                alert('request accepted')
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
                .then(console.log('request updated'))
@@ -51,7 +52,7 @@ class User extends Component {
    async available(e) {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
-        this.setState({ currentDrivers: filtered })
+        this.setState({ currentDrivers: filtered ,lat: 36.88563, long:10.1840075, name: '', end: !this.state.end})
         console.log(filtered)
         const latt = [];
         const longg = [];
@@ -64,10 +65,10 @@ class User extends Component {
         }
        await this.setState({driverData: arr})
         
-            this.boucle(arr,1)
+            this.boucle(arr,0)
         console.log(this.state.driverData)
     }
-    boucle(arr,i=1){
+    boucle(arr,i=0){
                this.setState({lat: arr[i].lat, long:arr[i].long , name: arr[i].name})
              setTimeout(() => {
                     i = i +1
@@ -77,6 +78,8 @@ class User extends Component {
                      if(i === (arr.length )){
                          i =1
                          this.boucle(arr,i)
+                     } if(this.state.end === false){
+                         return
                      }
              }, 3000);
 
