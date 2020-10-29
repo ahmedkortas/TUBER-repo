@@ -175,5 +175,19 @@ router.post('/request/response/update',(req,res)=>{
   })
 });
 
+router.post('/updatePosition',(req,res)=>{
+  console.log(req.body.lat)
+  let emailPicker = req.body.email;
+  let lat = req.body.lat;
+  let long = req.body.long;
+  db.updatePosition(emailPicker,lat,long,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+});
+
 
 module.exports = router;
