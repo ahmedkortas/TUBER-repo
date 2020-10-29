@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import App from '../App.js';
 import Axios from 'axios';
+import '../Styles/user.css'
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class User extends Component {
@@ -27,37 +28,37 @@ class User extends Component {
         this.goHome = this.goHome.bind(this);
         this.checkRes = this.checkRes.bind(this)
     }
-    checkRes(){
-        Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
-        .then(res=>{
-            console.log(res.data)
-            if(this.state.answer === 'ok'){
-               alert('request accepted')
-               Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
-               .then(console.log('request updated'))
-            }
-        })
+    checkRes() {
+        Axios.post('http://localhost:5000/drivers/request/response', { email: this.state.email })
+            .then(res => {
+                console.log(res.data)
+                if (this.state.answer === 'ok') {
+                    alert('request accepted')
+                    Axios.post('http://localhost:5000/drivers/request/response/update', { email: this.state.email })
+                        .then(console.log('request updated'))
+                }
+            })
     }
-   async sendRequest(e){
-    this.setState({email: e})
-     console.log(this.state)
-      await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?',lat: this.state.lat, long: this.state.long})
-        .then(res=>{
-            console.log('request sent')
-        })
+    async sendRequest(e) {
+        this.setState({ email: e })
+        console.log(this.state)
+        await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up?', lat: this.state.lat, long: this.state.long })
+            .then(res => {
+                console.log('request sent')
+            })
     }
     available(e) {
-        
+
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
         const latt = [];
         const long = [];
-        for(let i =0; i<filtered.length; i++){
+        for (let i = 0; i < filtered.length; i++) {
             latt.push(filtered[i].latt)
             long.push(filtered[i].longi)
         }
-        this.setState({driverLat: latt, driverLong: long})
+        this.setState({ driverLat: latt, driverLong: long })
         console.log(this.state)
     }
     availableChairs(e) {
@@ -66,12 +67,12 @@ class User extends Component {
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
-        
+
     }
 
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
-        
+
     }
 
     currentPosition() {
@@ -99,7 +100,7 @@ class User extends Component {
         else if (this.state.check === '') {
             return (
                 <div>
-                    <button onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br>
+                    <button className="homeButton" onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br>
                     <div>
                         <h3>Select Number Of Pasangers: </h3>
                         <select onChange={this.availableChairs}>
@@ -148,7 +149,7 @@ class User extends Component {
                                             {driver.rate}
                                         </div>
                                         <div>
-                                            <button onClick={()=>{this.sendRequest(driver.email)}}>Request A Tuber</button>
+                                            <button onClick={() => { this.sendRequest(driver.email) }}>Request A Tuber</button>
                                         </div>
                                     </li>
                                 )
@@ -161,18 +162,20 @@ class User extends Component {
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                             defaultCenter={this.props.center}
                             defaultZoom={this.props.zoom}
+
                         >
                             {
                                 this.state.data && <AnyReactComponent
                                     lat={this.state.data.latitude}
                                     lng={this.state.data.longitude}
                                     text="Client"
+
                                 />
                             }
 
                         </GoogleMapReact>
                     </div>
-                    
+
                 </div>
             )
         }
