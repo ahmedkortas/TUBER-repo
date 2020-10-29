@@ -110,8 +110,11 @@ router.post('/status',(req,res)=>{
 router.post('/request',(req,res)=>{
   var emailPicker = req.body.email;
   let request = req.body.request;
+  let lat = req.body.lat;
+  let long = req.body.long;
+  console.log(lat,long)
   if(!req.body.answer){
-  db.submitReq(request,emailPicker,(err,result)=>{
+  db.submitReq(request,lat,long,emailPicker,(err,result)=>{
     if(err){
       console.log(err)
     }else{

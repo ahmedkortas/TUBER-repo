@@ -13,7 +13,9 @@ class User extends Component {
             data: {},
             check: '',
             answer: '',
-            email: ''
+            email: '',
+            lat: 0,
+            long: 0
 
         }
         this.available = this.available.bind(this);
@@ -36,7 +38,8 @@ class User extends Component {
     }
    async sendRequest(e){
     this.setState({email: e})
-      await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?'})
+     console.log(this.state)
+      await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?',lat: this.state.lat, long: this.state.long})
         .then(res=>{
             console.log('request sent')
         })
@@ -46,7 +49,6 @@ class User extends Component {
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
-        console.log(this.state)
     }
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
@@ -54,14 +56,16 @@ class User extends Component {
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
+        
     }
 
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
+        
     }
 
     currentPosition() {
-        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords }) })
+        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude }) })
     }
 
     goHome(event) {

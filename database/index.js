@@ -115,8 +115,8 @@ const getAllInfo = (email, callback) => {
 };
 
 //
-const submitReq = (request,email, callback) => {
-  let syntax = ` INSERT INTO requests(request, picker_id) VALUES('${request}',(SELECT id FROM drivers WHERE email= '${email}'))`;
+const submitReq = (request,lat,long,email, callback) => {
+  let syntax = ` INSERT INTO requests(request, x, y, picker_id) VALUES('${request}',${lat},${long},(SELECT id FROM drivers WHERE email= '${email}'))`;
   connection.query(syntax, (err, result) => {
     if (err) {
       callback(err, null);
@@ -127,7 +127,7 @@ const submitReq = (request,email, callback) => {
 };
 
 const getAllReq = (emailPicker, callback) => {
-  let syntax = `SELECT request FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
+  let syntax = `SELECT * FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
   connection.query(syntax, (err, result) => {
     if (err) {
       callback(err, null);
@@ -136,6 +136,8 @@ const getAllReq = (emailPicker, callback) => {
     }
   });
 };
+
+
 
 const updateReq = (answer,emailPicker, callback) => {
   let syntax = `UPDATE requests SET request = '${answer}' WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
