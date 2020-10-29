@@ -30,7 +30,6 @@ class User extends Component {
     }
     async logOn(a, u) {
         await this.setState({ toggle: a, email: u })
-        console.log(this.state)
     }
     goHome(event) {
         event.preventDefault();

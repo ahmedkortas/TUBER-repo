@@ -15,7 +15,9 @@ class User extends Component {
             answer: '',
             email: '',
             lat: 0,
-            long: 0
+            long: 0,
+            driverLat: [],
+            driverLong: []
 
         }
         this.available = this.available.bind(this);
@@ -28,7 +30,7 @@ class User extends Component {
     checkRes(){
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
         .then(res=>{
-            this.setState({answer:res.data[0].available})
+            console.log(res.data)
             if(this.state.answer === 'ok'){
                alert('request accepted')
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
@@ -49,6 +51,14 @@ class User extends Component {
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered })
         console.log(filtered)
+        const latt = [];
+        const long = [];
+        for(let i =0; i<filtered.length; i++){
+            latt.push(filtered[i].latt)
+            long.push(filtered[i].longi)
+        }
+        this.setState({driverLat: latt, driverLong: long})
+        console.log(this.state)
     }
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
