@@ -13,7 +13,9 @@ class Informations extends Component {
             status: '',
             boolean: true,
             answer: '',
-            requests: []
+            requests: [],
+            lat: 0,
+            long: 0
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
@@ -25,13 +27,11 @@ class Informations extends Component {
         const email1 = this.props.email;
         const answer = 'ok';
         axios.post('http://localhost:5000/drivers/request', { answer: answer, email: email1 })
-            .then(res => { console.log(res.data) })
     }
     refresh() {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
-        console.log(this.state)
     }
     async handleAvail() {
         let info = ''
@@ -43,7 +43,9 @@ class Informations extends Component {
         }
         const email = this.props.email;
         console.log(info, email, this.state)
-        await axios.post('http://localhost:5000/drivers/status', { email: email, info: info })
+        axios.post('http://localhost:5000/drivers/updatePosition',{email: email, lat: this.state.lat, long: this.state.long})
+        .then(console.log('position updated'))
+        await axios.post('http://localhost:5000/drivers/status', { email: email, info: info})
             .then(res => {
                 if (res.data.affectedRow !== 0) {
                     this.setState({ status: info })
@@ -54,14 +56,13 @@ class Informations extends Component {
     componentDidMount() {
         this.setIntervalFunc()
         this.setState({ answer: this.props.request })
-
     }
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
     }
 
     currentPosition() {
-        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords }) })
+        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude  }) })
     }
     // LONG AND ALT 
     static defaultProps = {

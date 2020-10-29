@@ -163,6 +163,17 @@ const updateInfoRes = (email, callback) => {
   });
 };
 
+const updatePosition = (email, lat, long,callback)=>{
+  let syntax = ` UPDATE drivers SET latt = ${lat} , longi = ${long} WHERE email= '${email}'`;
+  connection.query(syntax, (err, result) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, result);
+    }
+  });
+}
+ 
 
 module.exports.getAllDrivers = getAllDrivers;
 module.exports.addNewDriver = addNewDriver;
@@ -176,3 +187,5 @@ module.exports.getAllReq = getAllReq;
 module.exports.updateReq = updateReq;
 module.exports.getAllInfo = getAllInfo;
 module.exports.updateInfoRes = updateInfoRes;
+module.exports.updatePosition = updatePosition;
+
