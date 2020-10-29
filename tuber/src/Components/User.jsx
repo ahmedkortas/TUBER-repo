@@ -29,6 +29,7 @@ class User extends Component {
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
         .then(res=>{
             this.setState({answer:res.data[0].available})
+            console.log(  'the erroooooooor is heeeeeere',res.data)
             if(this.state.answer === 'ok'){
                alert('request accepted')
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
