@@ -15,8 +15,8 @@ class User extends Component {
             check: '',
             answer: '',
             email: '',
-            lat: 0,
-            long: 0,
+            lat: 36.88563,
+            long: 10.1840075,
             name: 'Me',
             driverData: []
 

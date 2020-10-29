@@ -14,9 +14,9 @@ class Informations extends Component {
             boolean: true,
             answer: '',
             requests: [],
-            lat: 0,
-            long: 0,
-            display: {name: '', long: 0, lat: 0}
+            lat: 36.88563,
+            long: 10.1840075,
+            display: {name: '', long: 10.1840075, lat: 36.88563}
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
@@ -37,10 +37,10 @@ class Informations extends Component {
                  this.boucle(1)
              }
               if(i === 1){
-                this.setState({display :{name: 'Client', long: this.state.requests.y, lat: this.state.requests.x}})
+                this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
                   this.boucle(0)
               }
-      }, 3000);
+      }, 5000);
 
 }
     refresh() {
@@ -50,6 +50,7 @@ class Informations extends Component {
             console.log(this.state.requests)
 
             this.boucle(0)
+            console.log(this.state.requests)
     }
     async handleAvail() {
         let info = ''
@@ -69,6 +70,7 @@ class Informations extends Component {
                     this.setState({ status: info })
                 }
             })
+            this.setState({display : {name: 'Me', long: this.state.long, lat: this.state.lat}})
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -94,7 +96,7 @@ class Informations extends Component {
         const {requests} = this.state
         return (
             <div>
-                <button onClick={this.handleAvail}>Availability</button>
+                <button onClick={this.handleAvail}>Available</button>
                 <button onClick={this.refresh}>refresh requests</button>
                 <ul>
                     {this.state.requests.map(req => {
