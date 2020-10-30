@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import App from '../App.js';
+import Axios from 'axios';
+import '../Styles/user.css'
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{ background: 'red', display: 'inline-block', borderRadius: '4px' }}>{text}</div>;
+const AnyReactComponents = ({ text }) => <div style={{ background: 'green', display: 'inline-block', borderRadius: '4px' }}>{text}</div>;
 class User extends Component {
     constructor(props) {
         super(props);
@@ -10,7 +13,14 @@ class User extends Component {
             currentDrivers: [],
             chairs: 1,
             data: {},
-            check: ''
+            check: '',
+            answer: '',
+            email: '',
+            lat: 36.88563,
+            long: 10.1840075,
+            name: 'Me',
+            driverData: [],
+            end: false
 
         }
         this.available = this.available.bind(this);
@@ -18,12 +28,66 @@ class User extends Component {
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.availableChairs = this.availableChairs.bind(this);
         this.goHome = this.goHome.bind(this);
+        this.checkRes = this.checkRes.bind(this);
+        this.boucle = this.boucle.bind(this)
     }
-    available(e) {
-        const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
-        this.setState({ currentDrivers: filtered })
-        console.log(filtered)
+
+    checkRes() {
+        Axios.post('http://localhost:5000/drivers/request/response', { email: this.state.email })
+            .then(res => {
+                console.log(res.data)
+                if (res.data[0].available === 'ok') {
+                    alert('request accepted')
+                    Axios.post('http://localhost:5000/drivers/request/response/update', { email: this.state.email })
+                        .then(console.log('request updated'))
+                }
+            })
+    }
+    async sendRequest(e) {
+        this.setState({ email: e })
         console.log(this.state)
+        await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up ?', lat: this.state.lat, long: this.state.long })
+            .then(res => {
+                console.log('request sent')
+            })
+    }
+
+    async available(e) {
+        const { lat, long } = this.state;
+        const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
+        this.setState({ currentDrivers: filtered, lat: 36.88563, long: 10.1840075, name: '', end: !this.state.end })
+        console.log(filtered)
+        const latt = [];
+
+        const longg = [];
+        let arr = []
+        for (let i = 0; i < filtered.length; i++) {
+            // latt.push(filtered[i].latt)
+            // long.push(filtered[i].longi)
+
+            arr = arr.concat({ name: filtered[i].firstName, lat: filtered[i].latt, long: filtered[i].longi })
+            arr.unshift({ name: 'Me', lat: lat, long: long })
+        }
+        await this.setState({ driverData: arr })
+
+        this.boucle(arr, 0)
+        console.log(this.state.driverData)
+    }
+    boucle(arr, i = 0) {
+        this.setState({ lat: arr[i].lat, long: arr[i].long, name: arr[i].name })
+        setTimeout(() => {
+            i = i + 1
+            if (i < arr.length) {
+                this.boucle(arr, i)
+            }
+            if (i === (arr.length)) {
+                i = 1
+                this.boucle(arr, i)
+            } if (this.state.end === false) {
+                return
+            }
+        }, 3000);
+
     }
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
@@ -31,14 +95,16 @@ class User extends Component {
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
+
     }
 
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
+
     }
 
     currentPosition() {
-        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords }) })
+        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude }) })
     }
 
     goHome(event) {
@@ -61,21 +127,23 @@ class User extends Component {
         }
         else if (this.state.check === '') {
             return (
-                <div>
-                    <button onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br>
+
+                <div className='main'>
+                    <h3 className="homeButton" onClick={(event) => { this.goHome(event) }}>Home</h3> <br></br><br></br>
+
                     <div>
-                        <h3>Select Number Of Pasangers: </h3>
-                        <select onChange={this.availableChairs}>
+                        <h3 className="PassengerN">Select Number Of Pasangers: </h3>
+                        <select className="select" onChange={this.availableChairs}>
                             <option ></option>
                             <option >1</option>
                             <option >2</option>
-                            <option >2</option>
                             <option >3</option>
+                            <option >4</option>
                         </select>
                     </div>
                     <div>
-                        <h3>Select Area: </h3>
-                        <select onChange={this.available}>
+                        <h3 className="PassengerN">Select Area: </h3>
+                        <select className="select" onChange={this.available}>
                             <option  ></option>
                             <option >ariana</option>
                             <option >tunis</option>
@@ -85,59 +153,67 @@ class User extends Component {
                         </select>
                     </div>
                     <div>
-                        <ul>
+                        <ul className="list">
                             {this.state.currentDrivers.map(driver => {
                                 return (
-                                    <li>
-                                        <div>firstName: <br />
+                                    <center>
+                                        <li className="list">
+                                            <div>firstName: &nbsp;
                                             {driver.firstName}
-                                        </div>
-                                        <div>lastName:  <br />
+                                            </div>
+                                            <div>lastName: &nbsp;
                                             {driver.lastName}
-                                        </div>
-                                        <div>yearOfBirth:<br />
+                                            </div>
+                                            <div>yearOfBirth: &nbsp;
                                             {driver.yearOfBirth}
-                                        </div>
-                                        <div>car brand: <br />
+                                            </div>
+                                            <div>car brand: &nbsp;
                                             {driver.car}
-                                        </div>
-                                        <div>km/dt: <br />
+                                            </div>
+                                            <div>km/dt: &nbsp;
                                             {driver.km}
-                                        </div>
-                                        <div>gender: <br />
+                                            </div>
+                                            <div>gender: &nbsp;
                                             {driver.gender}
-                                        </div>
-                                        <div>rate: <br />
+                                            </div>
+                                            <div>rate: &nbsp;
                                             {driver.rate}
-                                        </div>
-                                    </li>
+                                            </div> <br></br>
+                                            <div>
+                                                <button onClick={() => { this.sendRequest(driver.email) }}>Request A Tuber</button>
+                                            </div>
+                                            <hr className="line"></hr>
+                                        </li>
+                                    </center>
                                 )
                             })}
                         </ul>
                     </div>
-                    <div style={{ height: '50vh', width: '50%' }}>
+                    <button className="response" onClick={this.checkRes}>Check Response</button>
+                    <div className="map">
                         <GoogleMapReact
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                             defaultCenter={this.props.center}
                             defaultZoom={this.props.zoom}
+
                         >
                             {
                                 this.state.data && <AnyReactComponent
-                                    lat={this.state.data.latitude}
-                                    lng={this.state.data.longitude}
-                                    text="Client"
+
+                                    lat={this.state.lat}
+                                    lng={this.state.long}
+                                    text={this.state.name}
                                 />
                             }
 
                         </GoogleMapReact>
                     </div>
+
                 </div>
             )
         }
 
     }
 }
-// export default GoogleApiWrapper({
-//     apiKey: ("AIzaSyA0ldEuZXZKJuPmYI5b0YsWnueNgL7t0OE")
-//   })(User)
+
 export default User;

@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("../database/index.js");
+const pw = require("./salt.js")
 const router = express.Router();
 
 router.post("/signup", (req, res) => {
@@ -7,7 +8,7 @@ router.post("/signup", (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const email = req.body.email;
-  const password = req.body.password;
+  const password = pw.saltBath(req.body.password);
   const yearOfBirth = req.body.yearOfBirth;
   const idCard = req.body.idCard;
   const driveLicense = req.body.driveLicense;
@@ -50,7 +51,7 @@ router.post("/signup", (req, res) => {
 });
 router.post("/signin", (req, res) => {
   const email = req.body.email;
-  const password = req.body.password;
+  const password = pw.saltBath(req.body.password);
   db.getEmailAndPassword(email, password, (err, result) => {
     if (err) {
       console.log(err);
@@ -90,5 +91,104 @@ router.post("/history", (req, res) => {
     }
   });
 });
+
+// POST REQUEST TO UPDATE STATUS 
+
+router.post('/status',(req,res)=>{
+  let emailDriver = req.body.email;
+  let info = req.body.info;
+  db.getInfo(emailDriver,info,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.status(200).json(result)
+    }
+  })
+
+});
+
+router.post('/request',(req,res)=>{
+  var emailPicker = req.body.email;
+  let request = req.body.request;
+  let lat = req.body.lat;
+  let long = req.body.long;
+  console.log(lat,long)
+  if(!req.body.answer){
+  db.submitReq(request,lat,long,emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+        console.log('waiting for answer')
+    }
+  })
+  }else{
+    console.log(req.body.answer)
+    console.log(emailPicker)
+    db.getInfo(emailPicker,req.body.answer,(err,result)=>{
+      console.log(req.body.email)
+      if(err){
+        console.log(err)
+      }else{
+        console.log(result)
+        db.getAllInfo(emailPicker,(err,result)=>{
+          if(err){
+            console.log(err)
+          }else{
+            res.status(200).json(result)
+          }
+        })
+      }
+    })
+  }
+})
+
+router.post('/requests/answer',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.getAllReq(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      res.status(200).json(result)
+    }
+  })
+});
+
+router.post('/request/response',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.getAllInfo(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result)
+      res.status(200).json(result)
+    }
+  })
+});
+
+router.post('/request/response/update',(req,res)=>{
+  let emailPicker = req.body.email;
+  db.updateInfoRes(emailPicker,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+});
+
+router.post('/updatePosition',(req,res)=>{
+  console.log(req.body.lat)
+  let emailPicker = req.body.email;
+  let lat = req.body.lat;
+  let long = req.body.long;
+  db.updatePosition(emailPicker,lat,long,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(result)
+    }
+  })
+});
+
 
 module.exports = router;
