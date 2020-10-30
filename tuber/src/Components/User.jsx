@@ -4,8 +4,7 @@ import App from '../App.js';
 import Axios from 'axios';
 import '../Styles/user.css'
 
-const AnyReactComponent = ({ text }) => <div style={{background: 'red', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
-const AnyReactComponents = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
+const AnyReactComponent = ({ text }) => <div><img src="https://p1.hiclipart.com/preview/601/58/532/falling-man-drawing-stick-figure-logo-line-hand-finger-symbol-png-clipart.jpg" alt="logo" width='30px' height='30px'/> {text}</div>;
 class User extends Component {
     constructor(props) {
         super(props);
@@ -16,8 +15,8 @@ class User extends Component {
             check: '',
             answer: '',
             email: '',
-            lat: 36.88563,
-            long: 10.1840075,
+            lat: null,
+            long: null,
             name: 'Me',
             driverData: [],
             end: false
@@ -53,14 +52,12 @@ class User extends Component {
    async available(e) {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
-        this.setState({ currentDrivers: filtered ,lat: 36.88563, long:10.1840075, name: '', end: !this.state.end})
+        this.setState({ currentDrivers: filtered ,lat: null, long:null, name: '', end: !this.state.end})
         console.log(filtered)
         const latt = [];
         const longg = [];
         let arr = []
         for(let i =0; i<filtered.length; i++){
-            // latt.push(filtered[i].latt)
-            // long.push(filtered[i].longi)
             arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
             arr.unshift({name:'Me', lat: lat,long: long})
         }
@@ -71,6 +68,7 @@ class User extends Component {
     }
     boucle(arr,i=0){
                this.setState({lat: arr[i].lat, long:arr[i].long , name: arr[i].name})
+               console.log( arr[i].lat, arr[i].long ,arr[i].name)
              setTimeout(() => {
                     i = i +1
                     if(i < arr.length){ 
@@ -110,8 +108,8 @@ class User extends Component {
     // LONG AND ALT 
     static defaultProps = {
         center: {
-            lat: 36.94592,
-            lng:  10.1711872
+            lat: 41.111111,
+            lng:  25.00000
         },
         zoom: 11
     };

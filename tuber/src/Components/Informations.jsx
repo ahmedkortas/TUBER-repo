@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 
 
-const AnyReactComponent = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
+const AnyReactComponent = ({ text }) => <div ><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
 class Informations extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +16,8 @@ class Informations extends Component {
             requests: [],
             lat: 36.88563,
             long: 10.1840075,
-            display: {name: '', long: 10.1840075, lat: 36.88563}
+            display: {name: '', long: null, lat: null},
+            Userdisplay: {name: 'Me', long: null, lat: null}
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
@@ -33,24 +34,21 @@ class Informations extends Component {
     boucle(i=0){
       setTimeout(() => {
              if(i === 0){ 
-                this.setState({display : {name: 'Me', long: this.state.data.longitude, lat: this.state.data.latitude}});
-                 this.boucle(1)
+                this.setState({display : {name: 'Me', long: this.state.Userdisplay.long, lat: this.state.Userdisplay.lat}});
+                 this.boucle(1) 
              }
               if(i === 1){
                 this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
                   this.boucle(0)
               }
-      }, 5000);
+      }, 200);
 
 }
     refresh() {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
-            console.log(this.state.requests)
-
             this.boucle(0)
-            console.log(this.state.requests)
     }
     async handleAvail() {
         let info = ''
@@ -70,7 +68,8 @@ class Informations extends Component {
                     this.setState({ status: info })
                 }
             })
-            this.setState({display : {name: 'Me', long: this.state.long, lat: this.state.lat}})
+            this.setState({Userdisplay : {name: 'Me', long: this.state.long, lat: this.state.lat}})
+        
     }
     // map refresh when component mounts
     componentDidMount() {
