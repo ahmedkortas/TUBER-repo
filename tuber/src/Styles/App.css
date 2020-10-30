@@ -13,6 +13,32 @@
     text-align: center;
     letter-spacing: 4px;
     font-size: 18px;
+    color: rgb(226, 226, 226);
+}
+.intro1{
+    text-align: left;
+    letter-spacing: 4px;
+    font-size: 15px;
+    position: relative;
+    top: 7vh;
+    width: 100vw;
+    font-weight: bold;
+    left: 5vw;
+}
+.intro2{
+    text-align: right;
+    letter-spacing: 4px;
+    font-size: 12px;
+    position: relative;
+    top: 5vh;
+    
+    
+}
+.or{
+    position: relative;
+    left: 47vw;
+    top: -6vh;
+    color: rgb(226, 226, 226);
 }
 .find{
     text-align: center;

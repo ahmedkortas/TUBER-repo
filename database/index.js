@@ -8,6 +8,7 @@ const connection = mysql.createConnection({
   insecureAuth: true,
 });
 
+
 connection.connect((err) => {
   if (err) throw err;
   console.log("Database connected");
@@ -92,7 +93,7 @@ const createHistory = (longtitude, lattitude, idCard, callback) => {
   });
 };
 // GETTING A PREVIEW POSITION FOR THE ONLINE DRIVERS
-const getInfo = (email,info, callback) => {
+const getInfo = (email, info, callback) => {
   let syntax = ` UPDATE history SET available = '${info}' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
     if (err) {
@@ -115,6 +116,7 @@ const getAllInfo = (email, callback) => {
 };
 
 //
+
 const submitReq = (request,lat,long,email, callback) => {
   let syntax = ` INSERT INTO requests(request, x, y, picker_id) VALUES('${request}',${lat},${long},(SELECT id FROM drivers WHERE email= '${email}'))`;
   connection.query(syntax, (err, result) => {

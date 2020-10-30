@@ -1,34 +1,26 @@
+.signin{
+    width:95vw;
+}
 .registration1{
     text-align: center;
-    margin-left: -415px;
+}
+.inputEmail {
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
 }
 .button{
-    position: relative;
-    left: -203px;
-    top: 82px;
-}
-.inputs{
-    position: relative;
-    margin-left: 21px;
     display: block;
-    
-}
-.inputEmail{
     position: relative;
-    left: 89px;
-    background: rgba(236, 235, 235,0.2);
-    border: 2px solid rgb(236, 235, 235);
-    border-radius: 5px;
-    background-color: #100e17;
-    color: rgb(236, 235, 235);
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
 }
 .inputPassword{
     position: relative;
-    left: -88px;
-    top: 39px;
-    background: rgba(236, 235, 235,0.2);
-    border: 2px solid rgb(236, 235, 235);
-    border-radius: 5px;
-    background-color: #100e17;
-    color: rgb(236, 235, 235);
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
 }

@@ -44,13 +44,13 @@ class User extends Component {
             }
         })
     }
-   async sendRequest(e){
-    this.setState({email: e})
-     console.log(this.state)
-      await  Axios.post('http://localhost:5000/drivers/request',{email: e, request: 'pick me up?',lat: this.state.lat, long: this.state.long})
-        .then(res=>{
-            console.log('request sent')
-        })
+    async sendRequest(e) {
+        this.setState({ email: e })
+        console.log(this.state)
+        await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up ?', lat: this.state.lat, long: this.state.long })
+            .then(res => {
+                console.log('request sent')
+            })
     }
     available(e) {
         const {lat,long} = this.state;
@@ -81,7 +81,6 @@ class User extends Component {
                         this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
                          this.boucle(arr,i=0)
              }}, 200);
-
     }
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
@@ -89,12 +88,12 @@ class User extends Component {
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
-        
+
     }
 
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
-        
+
     }
 
     currentPosition() {
@@ -109,7 +108,7 @@ class User extends Component {
     static defaultProps = {
         center: {
             lat: 36.94592,
-            lng:  10.1711872
+            lng: 10.1711872
         },
         zoom: 11
     };
@@ -121,8 +120,10 @@ class User extends Component {
         }
         else if (this.state.check === '') {
             return (
+
                 <div className='main'>
                     <h3 className="homeButton" onClick={(event) => { this.goHome(event) }}>Home</h3> <br></br><br></br>
+
                     <div>
                         <h3 className="PassengerN">Select Number Of Pasangers: </h3>
                         <select className="select" onChange={this.availableChairs}>
@@ -147,42 +148,46 @@ class User extends Component {
                         <ul className="list">
                             {this.state.currentDrivers.map(driver => {
                                 return (
-                                    <li>
-                                        <div>firstName: <br />
+                                    <center>
+                                        <li className="list">
+                                            <div>firstName: &nbsp;
                                             {driver.firstName}
-                                        </div>
-                                        <div>lastName:  <br />
+                                            </div>
+                                            <div>lastName: &nbsp;
                                             {driver.lastName}
-                                        </div>
-                                        <div>yearOfBirth:<br />
+                                            </div>
+                                            <div>yearOfBirth: &nbsp;
                                             {driver.yearOfBirth}
-                                        </div>
-                                        <div>car brand: <br />
+                                            </div>
+                                            <div>car brand: &nbsp;
                                             {driver.car}
-                                        </div>
-                                        <div>km/dt: <br />
+                                            </div>
+                                            <div>km/dt: &nbsp;
                                             {driver.km}
-                                        </div>
-                                        <div>gender: <br />
+                                            </div>
+                                            <div>gender: &nbsp;
                                             {driver.gender}
-                                        </div>
-                                        <div>rate: <br />
+                                            </div>
+                                            <div>rate: &nbsp;
                                             {driver.rate}
-                                        </div>
-                                        <div>
-                                            <button onClick={()=>{this.sendRequest(driver.email)}}>Request A Tuber</button>
-                                        </div>
-                                    </li>
+                                            </div> <br></br>
+                                            <div>
+                                                <button onClick={() => { this.sendRequest(driver.email) }}>Request A Tuber</button>
+                                            </div>
+                                            <hr className="line"></hr>
+                                        </li>
+                                    </center>
                                 )
                             })}
                         </ul>
                     </div>
                     <button className="response" onClick={this.checkRes}>Check Response</button>
-                    <div  className="map">
+                    <div className="map">
                         <GoogleMapReact
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                             defaultCenter={this.props.center}
                             defaultZoom={this.props.zoom}
+
                         >
                             {
                                 this.state.data && <AnyReactComponent
@@ -191,9 +196,10 @@ class User extends Component {
                                     text={this.state.dr.name}
                                 />
                             }
+
                         </GoogleMapReact>
                     </div>
-                    
+
                 </div>
             )
         }

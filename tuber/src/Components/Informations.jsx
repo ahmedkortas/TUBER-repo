@@ -42,8 +42,7 @@ class Informations extends Component {
                   this.boucle(0)
               }
       }, 200);
-
-}
+    }
     refresh() {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
@@ -60,16 +59,15 @@ class Informations extends Component {
         }
         const email = this.props.email;
         console.log(info, email, this.state)
-        axios.post('http://localhost:5000/drivers/updatePosition',{email: email, lat: this.state.lat, long: this.state.long})
-        .then(console.log('position updated'))
-        await axios.post('http://localhost:5000/drivers/status', { email: email, info: info})
+        axios.post('http://localhost:5000/drivers/updatePosition', { email: email, lat: this.state.lat, long: this.state.long })
+            .then(console.log('position updated'))
+        await axios.post('http://localhost:5000/drivers/status', { email: email, info: info })
             .then(res => {
                 if (res.data.affectedRow !== 0) {
                     this.setState({ status: info })
                 }
             })
-            this.setState({Userdisplay : {name: 'Me', long: this.state.long, lat: this.state.lat}})
-        
+           this.setState({Userdisplay : {name: 'Me', long: this.state.long, lat: this.state.lat}})
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -81,7 +79,7 @@ class Informations extends Component {
     }
 
     currentPosition() {
-        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude  }) })
+        navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude }) })
     }
     // LONG AND ALT 
     static defaultProps = {
@@ -92,17 +90,20 @@ class Informations extends Component {
         zoom: 11
     };
     render() {
-        const {requests} = this.state
+        const { requests } = this.state
         return (
             <div>
-                <button onClick={this.handleAvail}>Available</button>
-                <button onClick={this.refresh}>refresh requests</button>
+                <button className="button" onClick={this.handleAvail}>Available</button><br></br>
+                <hr className="line"></hr>
+                <button className="button" onClick={this.refresh}>refresh requests</button>
                 <ul>
                     {this.state.requests.map(req => {
                         return (
-                            <li key={req.id}>
-                                {req.request}
+                            <li className="list" key={req.id}>
+
+                                {req.request} &nbsp; &nbsp;
                                 <button onClick={this.confirmLift}>Accept</button>
+
                             </li>
                         )
                     })}
@@ -110,7 +111,7 @@ class Informations extends Component {
                 <div>
                     {this.props.request}
                 </div>
-                <div style={{ height: '50vh', width: '50%' }}>
+                <div className="map">
                     <GoogleMapReact
                         // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                         defaultCenter={this.props.center}
