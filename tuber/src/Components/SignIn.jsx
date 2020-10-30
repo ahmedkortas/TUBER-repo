@@ -35,15 +35,15 @@ class SignIn extends Component {
     render() {
         const { email, password, visible } = this.state
         return (
-            <div>
+            <div className="signin">
                 { visible && <div >
                     <h1 className="registration1">Log In</h1>
                     <div className="inputs">
-                    <form  onSubmit={this.sendAuto} className="singIn">
-                        <input  className="inputEmail" type="text" placeholder="Email" name='email' onChange={this.saveChange} />
-                        <input className="inputPassword" type="password" placeholder="Password" name='password' onChange={this.saveChange} />
-                        <button type="submit" className="button">Sign in</button>
-                    </form>
+                        <form className="signInForm" onSubmit={this.sendAuto} className="singIn">
+                            <input className="inputEmail" type="text" placeholder="Email" name='email' onChange={this.saveChange} />
+                            <input className="inputPassword" type="password" placeholder="Password" name='password' onChange={this.saveChange} />
+                            <button id="btn" type="submit" className="button">Sign in</button>
+                        </form>
                     </div>
                 </div>}
             </div>
