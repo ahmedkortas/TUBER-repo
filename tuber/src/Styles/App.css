@@ -32,10 +32,21 @@
     top: 50%;
     left: 5%;
     cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
 }
 .cust{
     position: absolute;
     right: 5%;
     top: 50%;
     cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
+}
+.finda{
+    text-align: center;
+    font-size: 23px;
+    position: relative;
+    top: 20px
+
 }
