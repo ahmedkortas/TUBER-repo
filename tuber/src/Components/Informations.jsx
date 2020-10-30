@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
 class Informations extends Component {
     constructor(props) {
         super(props);
@@ -14,24 +14,42 @@ class Informations extends Component {
             boolean: true,
             answer: '',
             requests: [],
-            lat: 0,
-            long: 0
+            lat: 36.88563,
+            long: 10.1840075,
+            display: {name: '', long: 10.1840075, lat: 36.88563}
         }
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
         this.handleAvail = this.handleAvail.bind(this);
         this.refresh = this.refresh.bind(this);
         this.confirmLift = this.confirmLift.bind(this);
+        this.boucle = this.boucle.bind(this);
     }
     confirmLift() {
         const email1 = this.props.email;
         const answer = 'ok';
         axios.post('http://localhost:5000/drivers/request', { answer: answer, email: email1 })
     }
+    boucle(i=0){
+      setTimeout(() => {
+             if(i === 0){ 
+                this.setState({display : {name: 'Me', long: this.state.data.longitude, lat: this.state.data.latitude}});
+                 this.boucle(1)
+             }
+              if(i === 1){
+                this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
+                  this.boucle(0)
+              }
+      }, 5000);
+
+}
     refresh() {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
+            console.log(this.state.requests)
+
+            this.boucle(0)
             console.log(this.state.requests)
     }
     async handleAvail() {
@@ -52,6 +70,7 @@ class Informations extends Component {
                     this.setState({ status: info })
                 }
             })
+            this.setState({display : {name: 'Me', long: this.state.long, lat: this.state.lat}})
     }
     // map refresh when component mounts
     componentDidMount() {
@@ -77,7 +96,7 @@ class Informations extends Component {
         const {requests} = this.state
         return (
             <div>
-                <button onClick={this.handleAvail}>Availability</button>
+                <button onClick={this.handleAvail}>Available</button>
                 <button onClick={this.refresh}>refresh requests</button>
                 <ul>
                     {this.state.requests.map(req => {
@@ -101,23 +120,13 @@ class Informations extends Component {
                     >
 
                         {
-                            this.state.data && <AnyReactComponent
-                                lat={this.state.data.latitude}
-                                lng={this.state.data.longitude}
-                                text="Driver"
+                            this.state.display && <AnyReactComponent
+                                lat={this.state.display.lat}
+                                lng={this.state.display.long}
+                                text={this.state.display.name}
                             />
 
                         }
-                        {
-                                requests &&
-                                <AnyReactComponent
-                                    lat={requests.x}
-                                    lng={requests.y}
-                                    text="Client"
-                                />
-                            }
-
-
                     </GoogleMapReact>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import '../Styles/signIn.css'
 
 class SignIn extends Component {
     constructor(props) {
@@ -36,12 +37,14 @@ class SignIn extends Component {
         return (
             <div>
                 { visible && <div >
-                    <h1 >Log In</h1>
-                    <form action="" onSubmit={this.sendAuto} className="singIn">
-                        <input type="text" placeholder="Email" name='email' onChange={this.saveChange} />
-                        <input type="password" placeholder="Password" name='password' onChange={this.saveChange} />
-                        <button type="submit">Sign in</button>
+                    <h1 className="registration1">Log In</h1>
+                    <div className="inputs">
+                    <form  onSubmit={this.sendAuto} className="singIn">
+                        <input  className="inputEmail" type="text" placeholder="Email" name='email' onChange={this.saveChange} />
+                        <input className="inputPassword" type="password" placeholder="Password" name='password' onChange={this.saveChange} />
+                        <button type="submit" className="button">Sign in</button>
                     </form>
+                    </div>
                 </div>}
             </div>
         )

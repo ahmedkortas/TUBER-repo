@@ -1,0 +1,52 @@
+.nav{
+    position: relative;
+    left: -7px;
+    height: 50vh;
+    top: 8vh;
+}
+.greet{
+    font-size: 28px;
+    z-index: 10;
+    letter-spacing: 4px;
+}
+.intro{
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 18px;
+}
+.find{
+    text-align: center;
+    font-size: 23px;
+}
+.driverCust{
+    position: relative;
+    width: 90vw;
+    height: 10vh;
+    left: 5vw;
+    top: 5vh;
+    font-weight: bold;
+    font-size: 20px;
+}
+.driver{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
+}
+.cust{
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
+}
+.finda{
+    text-align: center;
+    font-size: 23px;
+    position: relative;
+    top: 20px
+
+}

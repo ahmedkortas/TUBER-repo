@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import Informations from './Informations';
-import App from '../App.js'
+import App from '../App.js';
+import '../Styles/driver.css'
 class User extends Component {
     constructor(props) {
         super(props);
@@ -39,13 +40,13 @@ class User extends Component {
         const { toggle } = this.state
         if(this.state.check === ''){
         return (
-            <div>
-                <div><button onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br></div>
-                <div>
-                    {this.state.visible && toggle && <div><SignIn onResponse={(r, u) => { this.response(r, u) }} onUserDone={(u) => { this.responded(u) }} />
-                        <h3>Not registred?</h3><h4 onClick={this.changeView}>Register</h4></div>}
-                    {this.state.visible && !toggle && <div><SignUp onAccept={(a) => { this.logOn(a) }} />
-                        <h3>Already registred?</h3><h4 onClick={this.changeView}>Go back</h4></div>}
+            <div className="main">
+                <div><h3 className="homeButton" onClick={(event) => { this.goHome(event) }}>Home</h3> <br></br><br></br></div>
+                <div className="view">
+                    {this.state.visible && toggle && <div className="component"><SignIn onResponse={(r, u) => { this.response(r, u) }} onUserDone={(u) => { this.responded(u) }} />
+                        <h3 className="registration">Not registred?</h3><h4 onClick={this.changeView} className="registration">Register</h4></div>}
+                    {this.state.visible && !toggle && <div className="component"><SignUp onAccept={(a) => { this.logOn(a) }} />
+                        <h3 className="registration">Already registred?</h3><h4 onClick={this.changeView} className="registration">Go back</h4></div>}
                 </div>
                 {!this.state.visible && <div>
                     <Informations email={this.state.email} request={this.props.request}/>
