@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+import "../Styles/informations.css";
 
 
 const AnyReactComponent = ({ text }) => <div style={{ background: 'green', display: 'inline-block', borderRadius: '4px' }}>{text}</div>;

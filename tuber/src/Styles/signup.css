@@ -10,15 +10,14 @@
 .button{
     display: block;
     position: relative;
-    left: 50%;
+    left: 53%;
     transform: translate(-50%);
     margin-top: 3vh;
 }
-.field{
-    background-color: red;
-}
+
 .dezz{
     position: relative;
-    left: 2vw
+    left: 2vw;
+    width: 85vw;
 }
 
