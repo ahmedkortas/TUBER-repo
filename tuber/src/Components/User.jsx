@@ -46,7 +46,7 @@ class User extends Component {
     async sendRequest(e) {
         this.setState({ email: e })
         console.log(this.state)
-        await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up?', lat: this.state.lat, long: this.state.long })
+        await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up ?', lat: this.state.lat, long: this.state.long })
             .then(res => {
                 console.log('request sent')
             })
@@ -156,32 +156,35 @@ class User extends Component {
                         <ul className="list">
                             {this.state.currentDrivers.map(driver => {
                                 return (
-                                    <li>
-                                        <div>firstName: <br />
+                                    <center>
+                                        <li className="list">
+                                            <div>firstName: &nbsp;
                                             {driver.firstName}
-                                        </div>
-                                        <div>lastName:  <br />
+                                            </div>
+                                            <div>lastName: &nbsp;
                                             {driver.lastName}
-                                        </div>
-                                        <div>yearOfBirth:<br />
+                                            </div>
+                                            <div>yearOfBirth: &nbsp;
                                             {driver.yearOfBirth}
-                                        </div>
-                                        <div>car brand: <br />
+                                            </div>
+                                            <div>car brand: &nbsp;
                                             {driver.car}
-                                        </div>
-                                        <div>km/dt: <br />
+                                            </div>
+                                            <div>km/dt: &nbsp;
                                             {driver.km}
-                                        </div>
-                                        <div>gender: <br />
+                                            </div>
+                                            <div>gender: &nbsp;
                                             {driver.gender}
-                                        </div>
-                                        <div>rate: <br />
+                                            </div>
+                                            <div>rate: &nbsp;
                                             {driver.rate}
-                                        </div>
-                                        <div>
-                                            <button onClick={() => { this.sendRequest(driver.email) }}>Request A Tuber</button>
-                                        </div>
-                                    </li>
+                                            </div> <br></br>
+                                            <div>
+                                                <button onClick={() => { this.sendRequest(driver.email) }}>Request A Tuber</button>
+                                            </div>
+                                            <hr className="line"></hr>
+                                        </li>
+                                    </center>
                                 )
                             })}
                         </ul>

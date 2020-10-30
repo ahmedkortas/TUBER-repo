@@ -34,13 +34,15 @@ class App extends Component {
         <div>
           <div className="nav">
 
-            <center>   <span onClick={this.changeIt} className="greet"><h1>WELCOME</h1></span></center><br></br>
-                <p className="intro">Trying to get somewhere? <br/>
+            <center>   <span onClick={this.changeIt} className="greet"><h1>WELCOME <br /> To <br />TUBER</h1></span></center><br></br>
+            <p className="intro">Trying to get somewhere? <br />
                     No Taxi around?!
                 </p>
-                <h3 className="find">FIND <h3 className="finda">A</h3></h3>
+            <p className="intro1">Find a</p>
             <div className="driverCust"><span onClick={() => { this.changeView('User') }} className="driver">DRIVER</span><br></br><br></br>
-              <span onClick={() => { this.changeView('Driver') }} className="cust">CUSTOMER</span></div>
+              <span onClick={() => { this.changeView('Driver') }} className="cust">JOIN US</span></div>
+            <p className="intro2">Wanna make some money? <br /> </p>
+            <p className="or">Or</p>
           </div>
           <div >
 
