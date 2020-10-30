@@ -4,7 +4,7 @@ import App from '../App.js';
 import Axios from 'axios';
 import '../Styles/user.css'
 
-const AnyReactComponent = ({ text }) => <div><img src="https://p1.hiclipart.com/preview/601/58/532/falling-man-drawing-stick-figure-logo-line-hand-finger-symbol-png-clipart.jpg" alt="logo" width='30px' height='30px'/> {text}</div>;
+const AnyReactComponent = ({ text }) => <div><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
 class User extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +19,8 @@ class User extends Component {
             long: null,
             name: 'Me',
             driverData: [],
-            end: false
+            end: false,
+            dr:{lat: null, long: null,name: ''}
 
         }
         this.available = this.available.bind(this);
@@ -34,10 +35,12 @@ class User extends Component {
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
         .then(res=>{
             console.log(res.data)
-            if(res.data[0].available === 'ok'){
+            if(res.data.length >0 && res.data[0].available === 'ok'){
                alert('request accepted')
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
                .then(console.log('request updated'))
+            }else if (res.data.length === 0){ 
+                console.log('No Reponse')
             }
         })
     }
@@ -49,38 +52,35 @@ class User extends Component {
             console.log('request sent')
         })
     }
-   async available(e) {
+    available(e) {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
-        this.setState({ currentDrivers: filtered ,lat: null, long:null, name: '', end: !this.state.end})
+        this.setState({ currentDrivers: filtered , name: '', end: !this.state.end,dr: { lat: null, long: null , name: ''}})
         console.log(filtered)
-        const latt = [];
-        const longg = [];
         let arr = []
         for(let i =0; i<filtered.length; i++){
             arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
-            arr.unshift({name:'Me', lat: lat,long: long})
+            console.log(arr)
         }
-       await this.setState({driverData: arr})
+        this.setState({driverData: arr})
         
             this.boucle(arr,0)
-        console.log(this.state.driverData)
     }
     boucle(arr,i=0){
-               this.setState({lat: arr[i].lat, long:arr[i].long , name: arr[i].name})
-               console.log( arr[i].lat, arr[i].long ,arr[i].name)
-             setTimeout(() => {
-                    i = i +1
-                    if(i < arr.length){ 
-                        this.boucle(arr,i)
+
+             setTimeout(()=>{
+                 if(i ===0){
+                    this.setState({dr: { lat: arr[i].lat, long:arr[i].long , name: arr[i].name}})
+                    this.boucle(arr,i+1)
+                 }
+                     if(i < arr.length){ 
+                        this.setState({dr: { lat: arr[i].lat, long:arr[i].long , name: arr[i].name}})
+                        this.boucle(arr,i+1)
                     }
                      if(i === (arr.length )){
-                         i =1
-                         this.boucle(arr,i)
-                     } if(this.state.end === false){
-                         return
-                     }
-             }, 3000);
+                        this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
+                         this.boucle(arr,i=0)
+             }}, 200);
 
     }
     availableChairs(e) {
@@ -108,8 +108,8 @@ class User extends Component {
     // LONG AND ALT 
     static defaultProps = {
         center: {
-            lat: 41.111111,
-            lng:  25.00000
+            lat: 36.94592,
+            lng:  10.1711872
         },
         zoom: 11
     };
@@ -141,7 +141,6 @@ class User extends Component {
                             <option >tunis</option>
                             <option >gammarth</option>
                             <option >sokra</option>
-                            <option >wed lil</option>
                         </select>
                     </div>
                     <div>
@@ -187,9 +186,9 @@ class User extends Component {
                         >
                             {
                                 this.state.data && <AnyReactComponent
-                                    lat={this.state.lat}
-                                    lng={this.state.long}
-                                    text={this.state.name}
+                                    lat={this.state.dr.lat}
+                                    lng={this.state.dr.long}
+                                    text={this.state.dr.name}
                                 />
                             }
                         </GoogleMapReact>
