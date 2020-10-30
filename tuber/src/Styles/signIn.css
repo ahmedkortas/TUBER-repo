@@ -17,6 +17,7 @@
     left: 50%;
     transform: translate(-50%);
     margin-top: 3vh;
+    cursor: pointer;
 }
 .inputPassword{
     position: relative;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+import '../Styles/informations.css'
 
 
 const AnyReactComponent = ({ text }) => <div ><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
@@ -96,7 +97,7 @@ class Informations extends Component {
                 <button className="button" onClick={this.handleAvail}>Available</button><br></br>
                 <hr className="line"></hr>
                 <button className="button" onClick={this.refresh}>refresh requests</button>
-                <ul>
+                <ul className="listStyle">
                     {this.state.requests.map(req => {
                         return (
                             <li className="list" key={req.id}>

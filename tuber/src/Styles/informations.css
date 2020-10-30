@@ -11,15 +11,18 @@
     left: 50%;
     transform: translate(-50%);
     margin-top: 3vh;
+    cursor: pointer;
 }
 .line{
     background-image: linear-gradient(to right, orange , red);
     width:80vw;
     position:relative;
-    left:-2vw;
 }
 .list{
     list-style: none;
     position: relative;
-    left: 27vw;
+}
+.listStyle{
+    position: relative;
+    left: 42vw;
 }
