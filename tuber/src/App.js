@@ -38,7 +38,7 @@ class App extends Component {
                 <p className="intro">Trying to get somewhere? <br/>
                     No Taxi around?!
                 </p>
-                <h3 className="find">FIND A</h3>
+                <h3 className="find">FIND <h3 className="finda">A</h3></h3>
             <div className="driverCust"><span onClick={() => { this.changeView('User') }} className="driver">DRIVER</span><br></br><br></br>
               <span onClick={() => { this.changeView('Driver') }} className="cust">CUSTOMER</span></div>
           </div>
