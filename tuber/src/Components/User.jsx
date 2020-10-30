@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import App from '../App.js';
 import Axios from 'axios';
+import '../Styles/user.css'
 
 const AnyReactComponent = ({ text }) => <div style={{background: 'red', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
 const AnyReactComponents = ({ text }) => <div style={{background: 'green', display: 'inline-block', borderRadius: '4px'}}>{text}</div>;
@@ -122,11 +123,11 @@ class User extends Component {
         }
         else if (this.state.check === '') {
             return (
-                <div>
-                    <button onClick={(event) => { this.goHome(event) }}>Home</button> <br></br><br></br>
+                <div className='main'>
+                    <h3 className="homeButton" onClick={(event) => { this.goHome(event) }}>Home</h3> <br></br><br></br>
                     <div>
-                        <h3>Select Number Of Pasangers: </h3>
-                        <select onChange={this.availableChairs}>
+                        <h3 className="PassengerN">Select Number Of Pasangers: </h3>
+                        <select className="select" onChange={this.availableChairs}>
                             <option ></option>
                             <option >1</option>
                             <option >2</option>
@@ -135,8 +136,8 @@ class User extends Component {
                         </select>
                     </div>
                     <div>
-                        <h3>Select Area: </h3>
-                        <select onChange={this.available}>
+                        <h3 className="PassengerN">Select Area: </h3>
+                        <select className="select" onChange={this.available}>
                             <option  ></option>
                             <option >ariana</option>
                             <option >tunis</option>
@@ -146,7 +147,7 @@ class User extends Component {
                         </select>
                     </div>
                     <div>
-                        <ul>
+                        <ul className="list">
                             {this.state.currentDrivers.map(driver => {
                                 return (
                                     <li>
@@ -179,8 +180,8 @@ class User extends Component {
                             })}
                         </ul>
                     </div>
-                    <button onClick={this.checkRes}>Check Response</button>
-                    <div style={{ height: '50vh', width: '50%' }}>
+                    <button className="response" onClick={this.checkRes}>Check Response</button>
+                    <div  className="map">
                         <GoogleMapReact
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                             defaultCenter={this.props.center}

@@ -1,0 +1,26 @@
+.main{
+        width: 95vw;
+        height: 95vh;
+        position: relative;
+}
+.homeButton{
+    text-align: center;
+    padding-top: 5vh;
+    font-size: 23px;
+    text-transform: uppercase;
+}
+.registration{
+    text-align: center;
+    margin-left: -336px;
+    position: relative;
+    top: 96px;
+}
+.component{
+    width: 95vh;
+    padding-left: 11px;
+}
+.view{
+    position: relative;
+    left: 50%;
+    transform: translatex(-50%);
+}

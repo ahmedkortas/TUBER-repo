@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import User from './Components/User.jsx';
 import Driver from './Components/Driver.jsx';
-import axios from 'axios'
+import axios from 'axios';
+import './Styles/App.css';
+
 
 
 class App extends Component {
@@ -32,9 +34,13 @@ class App extends Component {
         <div>
           <div className="nav">
 
-            <center>   <span onClick={this.changeIt}>Welcome people to Tuber</span></center><br></br>
-            <div ><span onClick={() => { this.changeView('User') }}>looking for a ride</span><br></br><br></br>
-              <span onClick={() => { this.changeView('Driver') }}>You want to be a driver</span></div>
+            <center>   <span onClick={this.changeIt} className="greet"><h1>WELCOME</h1></span></center><br></br>
+                <p className="intro">Trying to get somewhere? <br/>
+                    No Taxi around?!
+                </p>
+                <h3 className="find">FIND A</h3>
+            <div className="driverCust"><span onClick={() => { this.changeView('User') }} className="driver">DRIVER</span><br></br><br></br>
+              <span onClick={() => { this.changeView('Driver') }} className="cust">CUSTOMER</span></div>
           </div>
           <div >
 
