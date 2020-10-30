@@ -60,6 +60,7 @@
     cursor: pointer;
     border: 1px solid rgb(236, 235, 235);
     border-radius: 5px;
+    cursor: pointer;
 }
 .cust{
     position: absolute;
@@ -68,6 +69,7 @@
     cursor: pointer;
     border: 1px solid rgb(236, 235, 235);
     border-radius: 5px;
+    cursor: pointer;
 }
 .finda{
     text-align: center;
