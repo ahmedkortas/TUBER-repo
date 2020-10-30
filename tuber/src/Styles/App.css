@@ -1,0 +1,80 @@
+.nav{
+    position: relative;
+    left: -7px;
+    height: 50vh;
+    top: 8vh;
+}
+.greet{
+    font-size: 28px;
+    z-index: 10;
+    letter-spacing: 4px;
+}
+.intro{
+    text-align: center;
+    letter-spacing: 4px;
+    font-size: 18px;
+    color: rgb(226, 226, 226);
+}
+.intro1{
+    text-align: left;
+    letter-spacing: 4px;
+    font-size: 15px;
+    position: relative;
+    top: 7vh;
+    width: 100vw;
+    font-weight: bold;
+    left: 5vw;
+}
+.intro2{
+    text-align: right;
+    letter-spacing: 4px;
+    font-size: 12px;
+    position: relative;
+    top: 5vh;
+    
+    
+}
+.or{
+    position: relative;
+    left: 47vw;
+    top: -6vh;
+    color: rgb(226, 226, 226);
+}
+.find{
+    text-align: center;
+    font-size: 23px;
+}
+.driverCust{
+    position: relative;
+    width: 90vw;
+    height: 10vh;
+    left: 5vw;
+    top: 5vh;
+    font-weight: bold;
+    font-size: 20px;
+}
+.driver{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.cust{
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    cursor: pointer;
+    border: 1px solid rgb(236, 235, 235);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.finda{
+    text-align: center;
+    font-size: 23px;
+    position: relative;
+    top: 20px
+
+}

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import User from './Components/User.jsx';
 import Driver from './Components/Driver.jsx';
-import axios from 'axios'
+import axios from 'axios';
+import './Styles/App.css';
+
 
 
 class App extends Component {
@@ -13,17 +15,22 @@ class App extends Component {
       // overAll: 'none'
     }
   }
+
+
   componentDidMount() {
     axios.get('http://localhost:5000/users')
       .then(res => { this.setState({ drivers: res.data }) })
-    console.log(this.state)
   }
+
+
   changeView(option) {
     this.setState({
       view: option,
       overAll: 'Vision'
     })
   }
+
+  
   render() {
     console.log(this.state)
     if (this.state.view === 'none') {
@@ -33,9 +40,15 @@ class App extends Component {
         <div>
           <div className="nav">
 
-            <center>   <span onClick={this.changeIt}>Welcome people to Tuber</span></center><br></br>
-            <div ><span onClick={() => { this.changeView('User') }}>looking for a ride</span><br></br><br></br>
-              <span onClick={() => { this.changeView('Driver') }}>You want to be a driver</span></div>
+            <center>   <span onClick={this.changeIt} className="greet"><h1>WELCOME <br /> To <br />TUBER</h1></span></center><br></br>
+            <p className="intro">Trying to get somewhere? <br />
+                    No Taxi around?!
+                </p>
+            <p className="intro1">Find a</p>
+            <div className="driverCust"><span onClick={() => { this.changeView('User') }} className="driver">DRIVER</span><br></br><br></br>
+              <span onClick={() => { this.changeView('Driver') }} className="cust">JOIN US</span></div>
+            <p className="intro2">Wanna make some money? <br /> </p>
+            <p className="or">Or</p>
           </div>
           <div >
 

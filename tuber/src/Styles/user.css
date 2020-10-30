@@ -1,0 +1,54 @@
+.main{
+    width: 95vw;
+    height: 95vh;
+    position: relative;
+}
+.homeButton{
+    text-align: center;
+    padding-top: 5vh;
+    font-size: 23px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.PassengerN{
+    text-align: center;
+    font-size: 23px;
+    cursor: pointer;
+}
+.select{
+    position: relative;
+    left:50%;
+    transform: translatex(-50%);
+    width: 15vw;
+    background: rgba(236, 235, 235,0.2);
+    border: 2px solid rgb(236, 235, 235);
+    border-radius: 5px;
+    background-color: #100e17;
+    color: rgb(236, 235, 235);
+    cursor: pointer;
+}
+.map{
+    width: 100vw;
+    height: 40vh;
+    position: relative;
+    top: 5vh
+}
+.response{
+    position: relative;
+    left:50%;
+    transform: translatex(-50%);
+    width: 25vw;
+    background: rgba(236, 235, 235,0.2);
+    border: 2px solid rgb(236, 235, 235);
+    border-radius: 5px;
+    color:rgb(236, 235, 235);
+    cursor: pointer;
+}
+.line{
+    background-image: linear-gradient(to right, orange , red);
+    width:90vw;
+    position:relative;
+}
+.list{
+    list-style: none
+}

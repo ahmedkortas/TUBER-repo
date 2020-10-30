@@ -1,0 +1,27 @@
+.signin{
+    width:95vw;
+}
+.registration1{
+    text-align: center;
+}
+.inputEmail {
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+}
+.button{
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+    cursor: pointer;
+}
+.inputPassword{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+}
