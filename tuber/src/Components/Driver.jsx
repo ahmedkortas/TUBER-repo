@@ -4,6 +4,8 @@ import SignUp from './SignUp';
 import Informations from './Informations';
 import App from '../App.js';
 import '../Styles/driver.css'
+
+
 class User extends Component {
     constructor(props) {
         super(props);
@@ -13,12 +15,17 @@ class User extends Component {
             visible: true,
             check: ''
         }
+
         this.changeView = this.changeView.bind(this);
         this.goHome = this.goHome.bind(this);
     }
+
+
     changeView() {
         this.setState({ toggle: !this.state.toggle })
     }
+
+
     response(r) {
         if (r === 'OK') {
             this.setState({ visible: false })
@@ -26,16 +33,24 @@ class User extends Component {
             this.setState({ visible: true })
         }
     }
+
+
     responded(u) {
         this.setState({ email: u })
     }
+
+    
     async logOn(a, u) {
         await this.setState({ toggle: a, email: u })
     }
+
+
     goHome(event) {
         event.preventDefault();
         this.setState({ check: 'home' })
     }
+
+    
     render() {
         const { toggle } = this.state
         if (this.state.check === '') {

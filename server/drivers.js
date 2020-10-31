@@ -3,6 +3,8 @@ const db = require("../database/index.js");
 const pw = require("./salt.js")
 const router = express.Router();
 
+
+// Post request to drivers to put there information
 router.post("/signup", (req, res) => {
   console.log(req.body);
   const firstName = req.body.firstName;
@@ -49,6 +51,9 @@ router.post("/signup", (req, res) => {
     }
   });
 });
+
+
+//Post request signIn to the drivers 
 router.post("/signin", (req, res) => {
   const email = req.body.email;
   const password = pw.saltBath(req.body.password);
@@ -68,6 +73,9 @@ router.post("/signin", (req, res) => {
     }
   });
 });
+
+
+//Post request to drivers to know there location
 router.post("/history/add", (req, res) => {
   const longtitude = req.body.longtitude;
   const lattitude = req.body.lattitude;
@@ -81,6 +89,8 @@ router.post("/history/add", (req, res) => {
   });
 });
 
+
+//Post request to users for there location
 router.post("/history", (req, res) => {
   const id = req.body.idCard;
   db.getHistory(id, (err, result) => {
@@ -92,8 +102,8 @@ router.post("/history", (req, res) => {
   });
 });
 
-// POST REQUEST TO UPDATE STATUS 
 
+//Post request to update status
 router.post('/status',(req,res)=>{
   let emailDriver = req.body.email;
   let info = req.body.info;
@@ -107,6 +117,8 @@ router.post('/status',(req,res)=>{
 
 });
 
+
+//Post request to the answer of drivers
 router.post('/request',(req,res)=>{
   var emailPicker = req.body.email;
   let request = req.body.request;
@@ -142,6 +154,8 @@ router.post('/request',(req,res)=>{
   }
 })
 
+
+// Post request to answer the users
 router.post('/requests/answer',(req,res)=>{
   let emailPicker = req.body.email;
   db.getAllReq(emailPicker,(err,result)=>{
@@ -153,6 +167,8 @@ router.post('/requests/answer',(req,res)=>{
   })
 });
 
+
+//Post request to drivers to response
 router.post('/request/response',(req,res)=>{
   let emailPicker = req.body.email;
   db.getAllInfo(emailPicker,(err,result)=>{
@@ -164,6 +180,8 @@ router.post('/request/response',(req,res)=>{
   })
 });
 
+
+//Post request to response the users
 router.post('/request/response/update',(req,res)=>{
   let emailPicker = req.body.email;
   db.updateInfoRes(emailPicker,(err,result)=>{
@@ -175,6 +193,8 @@ router.post('/request/response/update',(req,res)=>{
   })
 });
 
+
+//Post request to update the position of location
 router.post('/updatePosition',(req,res)=>{
   console.log(req.body.lat)
   let emailPicker = req.body.email;

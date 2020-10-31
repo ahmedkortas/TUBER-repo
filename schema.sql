@@ -25,6 +25,7 @@ CREATE TABLE drivers(
     PRIMARY KEY (ID)
 );
 
+
 CREATE TABLE history (
     id int NOT NULL AUTO_INCREMENT,
     available varchar(20) NOT NULL,
@@ -33,6 +34,8 @@ CREATE TABLE history (
      CONSTRAINT FK_driverID FOREIGN KEY (driver_id) References drivers(id)
 
 );
+
+
 CREATE TABLE requests(
     id int NOT NULL AUTO_INCREMENT,
     request varchar(20),
