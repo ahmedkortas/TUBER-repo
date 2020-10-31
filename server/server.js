@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const users = require('./users');
 const drivers = require('./drivers')
-const port = 5000;
+const port = process.env.port || 5000;
 
 app.use(cors());
 app.use(bodyParser.json())

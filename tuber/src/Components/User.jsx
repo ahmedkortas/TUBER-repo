@@ -94,7 +94,7 @@ class User extends Component {
                         this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
                         console.log(this.state)
                          this.boucle(arr,i=0)
-             }}, 200);
+             }}, 2000);
     }
 
 
