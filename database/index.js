@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 
+
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -14,6 +15,7 @@ connection.connect((err) => {
   console.log("Database connected");
 });
 
+
 const getAllDrivers = (callback) => {
   let syntax = `SELECT * FROM drivers`;
   connection.query(syntax, (err, result) => {
@@ -25,6 +27,7 @@ const getAllDrivers = (callback) => {
   });
 };
 
+
 const getADriver = (email, callback) => {
   let syntax = `SELECT email FROM drivers WHERE email= '${email}' `;
   connection.query(syntax, (err, result) => {
@@ -35,6 +38,7 @@ const getADriver = (email, callback) => {
     }
   });
 };
+
 
 const addNewDriver = (
   firstName,
@@ -61,6 +65,7 @@ const addNewDriver = (
   });
 };
 
+
 const getEmailAndPassword = (email, password, callback) => {
   let syntax = `SELECT * FROM drivers WHERE email= '${email}' AND password = '${password}' `;
   connection.query(syntax, (err, result) => {
@@ -72,6 +77,7 @@ const getEmailAndPassword = (email, password, callback) => {
   });
 };
 
+
 const getHistory = (driver_id, callback) => {
   let syntax = `SELECT * FROM history WHERE driver_id="${driver_id}"`;
   connection.query(syntax, (err, result) => {
@@ -82,6 +88,8 @@ const getHistory = (driver_id, callback) => {
     }
   });
 };
+
+
 const createHistory = (longtitude, lattitude, idCard, callback) => {
   let syntax = `INSERT INTO history(longitude, lattitude,driver_id) VALUES ("${longtitude}","${lattitude}",(SELECT id FROM drivers WHERE idCard=${idCard}))`;
   connection.query(syntax, (err, result) => {
@@ -92,7 +100,9 @@ const createHistory = (longtitude, lattitude, idCard, callback) => {
     }
   });
 };
-// GETTING A PREVIEW POSITION FOR THE ONLINE DRIVERS
+
+
+//Getting a preview position for the online drivers
 const getInfo = (email, info, callback) => {
   let syntax = ` UPDATE history SET available = '${info}' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
@@ -103,6 +113,7 @@ const getInfo = (email, info, callback) => {
     }
   });
 };
+
 
 const getAllInfo = (email, callback) => {
   let syntax = `SELECT available FROM history WHERE driver_id=(SELECT id FROM drivers WHERE email='${email}')`;
@@ -115,7 +126,6 @@ const getAllInfo = (email, callback) => {
   });
 };
 
-//
 
 const submitReq = (request,lat,long,email, callback) => {
   let syntax = ` INSERT INTO requests(request, x, y, picker_id) VALUES('${request}',${lat},${long},(SELECT id FROM drivers WHERE email= '${email}'))`;
@@ -127,6 +137,7 @@ const submitReq = (request,lat,long,email, callback) => {
     }
   });
 };
+
 
 const getAllReq = (emailPicker, callback) => {
   let syntax = `SELECT * FROM requests WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
@@ -140,7 +151,6 @@ const getAllReq = (emailPicker, callback) => {
 };
 
 
-
 const updateReq = (answer,emailPicker, callback) => {
   let syntax = `UPDATE requests SET request = '${answer}' WHERE picker_id=(SELECT id FROM drivers WHERE email='${emailPicker}')`;
   connection.query(syntax, (err, result) => {
@@ -152,6 +162,7 @@ const updateReq = (answer,emailPicker, callback) => {
   });
 };
 
+
 const updateInfoRes = (email, callback) => {
   let syntax = ` UPDATE history SET available = 'no' WHERE driver_id=(SELECT id FROM drivers WHERE email= '${email}')`;
   connection.query(syntax, (err, result) => {
@@ -162,6 +173,7 @@ const updateInfoRes = (email, callback) => {
     }
   });
 };
+
 
 const updatePosition = (email, lat, long,callback)=>{
   let syntax = ` UPDATE drivers SET latt = ${lat} , longi = ${long} WHERE email= '${email}'`;
@@ -188,4 +200,3 @@ module.exports.updateReq = updateReq;
 module.exports.getAllInfo = getAllInfo;
 module.exports.updateInfoRes = updateInfoRes;
 module.exports.updatePosition = updatePosition;
-

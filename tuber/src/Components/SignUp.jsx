@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../Styles/signup.css'
+
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
         }
+
         this.saveChange = this.saveChange.bind(this);
         this.register = this.register.bind(this)
     }
+
+
     saveChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
+
     register(e) {
         e.preventDefault();
         const { firstName, lastName, email, password, yearOfBirth, idCard, driveLicense, car, location, km, gender, visible } = this.state
@@ -27,6 +34,8 @@ class SignUp extends Component {
         }
         console.log(this.state)
     }
+
+    
     render() {
         const { firstName, lastName, email, password, yearOfBirth, idCard, driveLicense, car, location, km, gender, visible } = this.state
         return (

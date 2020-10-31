@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import '../Styles/signIn.css'
 
+
 class SignIn extends Component {
     constructor(props) {
         super(props);
@@ -10,14 +11,19 @@ class SignIn extends Component {
             password: '',
             visible: true
         }
+
         this.saveChange = this.saveChange.bind(this);
         this.sendAuto = this.sendAuto.bind(this)
     }
+
+
     saveChange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
+
+
     sendAuto(e) {
         e.preventDefault();
         const { email, password } = this.state
@@ -32,6 +38,8 @@ class SignIn extends Component {
                 this.props.onResponse(res.data)
             })
     }
+
+    
     render() {
         const { email, password, visible } = this.state
         return (
