@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import User from './Components/User.jsx';
 import Driver from './Components/Driver.jsx';
+import Footer from "./Components/Footer.jsx"
 import axios from 'axios';
 import './Styles/App.css';
 
@@ -45,16 +46,14 @@ class App extends Component {
             <p className="or">Or</p>
           </div>
           <div >
-
-
-            {/* {this.state.overAll === "Vision" ? <div> {this.state.view === 'User'
-            ? <User drivers={this.state.drivers} />
-            : <Driver />
-          }</div> : <div> </div>} */}
-
+          </div>
+          <div>
+            <Footer />
           </div>
         </div>
+
       )
+
     }
     if (this.state.view === 'User') {
       return (<User drivers={this.state.drivers} />)

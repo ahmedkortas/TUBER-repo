@@ -33,24 +33,22 @@ class SignUp extends Component {
         return (
             <div className="signin">
                 <h1 className="registration" >Sign up</h1>
-                <div className="dezz">
-                    <form action="" onSubmit={this.register}>
-                        <input type="text" placeholder="First Name" name='firstName' onChange={this.saveChange} />
-                        <input type="text" placeholder="Last Name" name='lastName' onChange={this.saveChange} />
-                        <input type="email" placeholder="Email" name='email' onChange={this.saveChange} />
-                        <input type="text" placeholder="Password" name='password' onChange={this.saveChange} />
-                        <input type="text" placeholder="Repeat Password" name='repeatPassword' onChange={this.saveChange} />
-                        <input type="number" placeholder="Id Card" name='idCard' onChange={this.saveChange} />
-                        <input type="number" placeholder="Drive License" name='driveLicense' onChange={this.saveChange} />
-                        <input type="text" placeholder="Car" name='car' onChange={this.saveChange} />
-                        <input type="text" placeholder="Location" name='location' onChange={this.saveChange} />
-                        <input type="number" placeholder="Year Of Birth" name='yearOfBirth' onChange={this.saveChange} />
-                        <input type="number" placeholder="Km Price" name='km' onChange={this.saveChange} />
-                        <input type="text" placeholder="Gender" name='gender' onChange={this.saveChange} />
-                        <button type="submit" className="button">Sign Up</button>
-                    </form>
-                </div>
-            </div >
+                <form action="" onSubmit={this.register}>
+                    <input className="dezz" type="text" placeholder="First Name" name='firstName' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Last Name" name='lastName' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="email" placeholder="Email" name='email' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Password" name='password' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Repeat Password" name='repeatPassword' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="number" placeholder="Id Card" name='idCard' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="number" placeholder="Drive License" name='driveLicense' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Car" name='car' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Location" name='location' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="number" placeholder="Year Of Birth" name='yearOfBirth' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="number" placeholder="Km Price" name='km' onChange={this.saveChange} />&nbsp;
+                        <input className="dezz" type="text" placeholder="Gender" name='gender' onChange={this.saveChange} />
+                    <button type="submit" className="button">Sign Up</button>
+                </form>
+            </div>
         )
     }
 }
