@@ -37,6 +37,7 @@ class Informations extends Component {
     confirmLift() {
         const email1 = this.props.email;
         const answer = 'ok';
+        alert('you accepted the lift request the client is wainting hurry up and be safe')
         axios.post('http://localhost:5000/drivers/request', { answer: answer, email: email1 })
     }
 
@@ -46,10 +47,12 @@ class Informations extends Component {
       setTimeout(() => {
              if(i === 0){ 
                 this.setState({display : {name: 'Me', long: this.state.Userdisplay.long, lat: this.state.Userdisplay.lat}});
+                console.log(this.state)
                  this.boucle(1) 
              }
               if(i === 1){
                 this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
+                console.log(this.state)
                   this.boucle(0)
               }
       }, 200);
@@ -75,6 +78,7 @@ class Informations extends Component {
         }
         const email = this.props.email;
         console.log(info, email, this.state)
+        alert('your location can be seen on the map now')
         axios.post('http://localhost:5000/drivers/updatePosition', { email: email, lat: this.state.lat, long: this.state.long })
             .then(console.log('position updated'))
         await axios.post('http://localhost:5000/drivers/status', { email: email, info: info })
