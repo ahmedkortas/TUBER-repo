@@ -1,11 +1,10 @@
 const mysql = require("mysql");
 
-
 const connection = mysql.createConnection({
-  host: "remotemysql.com",
-  user: "vQ0Jh8MyUe",
-  password: "I9JMpmzQVi",
-  database: "vQ0Jh8MyUe",
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "tuber",
   insecureAuth: true,
 });
 
