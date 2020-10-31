@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+
 import '../Styles/informations.css'
 
 
+
 const AnyReactComponent = ({ text }) => <div ><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
+
 
 class Informations extends Component {
     constructor(props) {
@@ -18,8 +21,8 @@ class Informations extends Component {
             requests: [],
             lat: 36.88563,
             long: 10.1840075,
-            display: {name: '', long: null, lat: null},
-            Userdisplay: {name: 'Me', long: null, lat: null}
+            display: { name: '', long: null, lat: null },
+            Userdisplay: { name: 'Me', long: null, lat: null }
         }
 
         this.currentPosition = this.currentPosition.bind(this);
@@ -34,21 +37,26 @@ class Informations extends Component {
     confirmLift() {
         const email1 = this.props.email;
         const answer = 'ok';
+        alert('you accepted the lift request the client is wainting hurry up and be safe')
         axios.post('http://localhost:5000/drivers/request', { answer: answer, email: email1 })
     }
+
 
 
     boucle(i=0){
       setTimeout(() => {
              if(i === 0){ 
                 this.setState({display : {name: 'Me', long: this.state.Userdisplay.long, lat: this.state.Userdisplay.lat}});
+                console.log(this.state)
                  this.boucle(1) 
              }
               if(i === 1){
                 this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
+                console.log(this.state)
                   this.boucle(0)
               }
       }, 200);
+
     }
 
 
@@ -56,7 +64,7 @@ class Informations extends Component {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
-            this.boucle(0)
+        this.boucle(0)
     }
 
 
@@ -70,6 +78,7 @@ class Informations extends Component {
         }
         const email = this.props.email;
         console.log(info, email, this.state)
+        alert('your location can be seen on the map now')
         axios.post('http://localhost:5000/drivers/updatePosition', { email: email, lat: this.state.lat, long: this.state.long })
             .then(console.log('position updated'))
         await axios.post('http://localhost:5000/drivers/status', { email: email, info: info })
@@ -78,7 +87,7 @@ class Informations extends Component {
                     this.setState({ status: info })
                 }
             })
-           this.setState({Userdisplay : {name: 'Me', long: this.state.long, lat: this.state.lat}})
+        this.setState({ Userdisplay: { name: 'Me', long: this.state.long, lat: this.state.lat } })
     }
 
 

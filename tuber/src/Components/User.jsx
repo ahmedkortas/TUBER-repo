@@ -40,7 +40,8 @@ class User extends Component {
         .then(res=>{
             console.log(res.data)
             if(res.data.length >0 && res.data[0].available === 'ok'){
-               alert('request accepted')
+                //alert with the driver email
+               alert(`request accepted a tuber driver will be on the way hold on You can contact him on this email ${this.state.email}`)
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
                .then(console.log('request updated'))
             }else if (res.data.length === 0){ 
@@ -53,10 +54,12 @@ class User extends Component {
     async sendRequest(e) {
         this.setState({ email: e })
         console.log(this.state)
+        alert('your request has been sent successfully wait for your driver response it should not take long  ')
         await Axios.post('http://localhost:5000/drivers/request', { email: e, request: 'pick me up ?', lat: this.state.lat, long: this.state.long })
             .then(res => {
                 console.log('request sent')
             })
+            
     }
 
 
@@ -87,8 +90,9 @@ class User extends Component {
                         this.setState({dr: { lat: arr[i].lat, long:arr[i].long , name: arr[i].name}})
                         this.boucle(arr,i+1)
                     }
-                     if(i === (arr.length )){
+                     if(i === arr.length ){
                         this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
+                        console.log(this.state)
                          this.boucle(arr,i=0)
              }}, 2000);
     }

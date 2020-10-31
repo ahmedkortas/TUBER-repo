@@ -31,8 +31,14 @@
     width: 100vw;
     height: 40vh;
     position: relative;
-    top: 5vh
+    top: 5vh;
+    left:2vw;
+    border-top: double;
+    border: solid;
+    border-top-width: revert;
+    border-left-width: thin;
 }
+
 .response{
     position: relative;
     left:50%;
