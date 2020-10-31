@@ -77,8 +77,9 @@ class User extends Component {
                         this.setState({dr: { lat: arr[i].lat, long:arr[i].long , name: arr[i].name}})
                         this.boucle(arr,i+1)
                     }
-                     if(i === (arr.length )){
+                     if(i === arr.length ){
                         this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
+                        console.log(this.state)
                          this.boucle(arr,i=0)
              }}, 200);
     }

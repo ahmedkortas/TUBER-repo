@@ -36,10 +36,12 @@ class Informations extends Component {
       setTimeout(() => {
              if(i === 0){ 
                 this.setState({display : {name: 'Me', long: this.state.Userdisplay.long, lat: this.state.Userdisplay.lat}});
+                console.log(this.state)
                  this.boucle(1) 
              }
               if(i === 1){
                 this.setState({display :{name: 'Client', long: this.state.requests[this.state.requests.length -1].y, lat: this.state.requests[this.state.requests.length -1].x}})
+                console.log(this.state)
                   this.boucle(0)
               }
       }, 200);
