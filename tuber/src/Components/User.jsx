@@ -40,6 +40,7 @@ class User extends Component {
         .then(res=>{
             console.log(res.data)
             if(res.data.length >0 && res.data[0].available === 'ok'){
+                //alert with the driver email
                alert(`request accepted a tuber driver will be on the way hold on You can contact him on this email ${this.state.email}`)
                Axios.post('http://localhost:5000/drivers/request/response/update',{email: this.state.email})
                .then(console.log('request updated'))
