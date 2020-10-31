@@ -64,7 +64,7 @@ class User extends Component {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered , name: '', end: !this.state.end,dr: { lat: null, long: null , name: ''}})
-        console.log(lat,long)
+        console.log(filtered)
         let arr = []
         for(let i =0; i<filtered.length; i++){
             arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
