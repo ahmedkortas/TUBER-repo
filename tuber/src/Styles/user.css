@@ -8,10 +8,12 @@
     padding-top: 5vh;
     font-size: 23px;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .PassengerN{
     text-align: center;
     font-size: 23px;
+    cursor: pointer;
 }
 .select{
     position: relative;
@@ -23,13 +25,20 @@
     border-radius: 5px;
     background-color: #100e17;
     color: rgb(236, 235, 235);
+    cursor: pointer;
 }
 .map{
     width: 100vw;
     height: 40vh;
     position: relative;
-    top: 5vh
+    top: 5vh;
+    left:2vw;
+    border-top: double;
+    border: solid;
+    border-top-width: revert;
+    border-left-width: thin;
 }
+
 .response{
     position: relative;
     left:50%;
@@ -38,13 +47,13 @@
     background: rgba(236, 235, 235,0.2);
     border: 2px solid rgb(236, 235, 235);
     border-radius: 5px;
-    color:rgb(236, 235, 235)
+    color:rgb(236, 235, 235);
+    cursor: pointer;
 }
 .line{
     background-image: linear-gradient(to right, orange , red);
-    width:80vw;
+    width:90vw;
     position:relative;
-    left:-5vw;
 }
 .list{
     list-style: none
