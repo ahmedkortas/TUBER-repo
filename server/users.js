@@ -3,7 +3,7 @@ const db = require('../database/index.js')
 const router = express.Router();
 
 
-router.get('/api',(req,res)=>{
+router.get('/users',(req,res)=>{
     db.getAllDrivers((err,result)=>{
         if(err){
             res.status(500).send(err)
