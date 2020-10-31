@@ -16,16 +16,22 @@ class App extends Component {
       // overAll: 'none'
     }
   }
+
+
   componentDidMount() {
     axios.get('http://localhost:5000/users')
       .then(res => { this.setState({ drivers: res.data }) })
   }
+
+
   changeView(option) {
     this.setState({
       view: option,
       overAll: 'Vision'
     })
   }
+
+  
   render() {
     console.log(this.state)
     if (this.state.view === 'none') {

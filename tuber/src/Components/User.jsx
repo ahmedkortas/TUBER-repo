@@ -4,6 +4,7 @@ import App from '../App.js';
 import Axios from 'axios';
 import '../Styles/user.css'
 
+
 const AnyReactComponent = ({ text }) => <div><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
 class User extends Component {
     constructor(props) {
@@ -23,6 +24,7 @@ class User extends Component {
             dr:{lat: null, long: null,name: ''}
 
         }
+
         this.available = this.available.bind(this);
         this.currentPosition = this.currentPosition.bind(this);
         this.setIntervalFunc = this.setIntervalFunc.bind(this);
@@ -31,6 +33,8 @@ class User extends Component {
         this.checkRes = this.checkRes.bind(this);
         this.boucle = this.boucle.bind(this)
     }
+
+
     checkRes(){
         Axios.post('http://localhost:5000/drivers/request/response',{email: this.state.email})
         .then(res=>{
@@ -44,6 +48,8 @@ class User extends Component {
             }
         })
     }
+
+
     async sendRequest(e) {
         this.setState({ email: e })
         console.log(this.state)
@@ -52,6 +58,8 @@ class User extends Component {
                 console.log('request sent')
             })
     }
+
+
     available(e) {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
@@ -66,6 +74,8 @@ class User extends Component {
         
             this.boucle(arr,0)
     }
+
+    
     boucle(arr,i=0){
 
              setTimeout(()=>{
@@ -82,28 +92,37 @@ class User extends Component {
                          this.boucle(arr,i=0)
              }}, 200);
     }
+
+
     availableChairs(e) {
         this.setState({ chairs: e.target.value })
     }
+
+
     // map refresh when component mounts
     componentDidMount() {
         this.setIntervalFunc()
 
     }
 
+
     setIntervalFunc() {
         setInterval(this.currentPosition, 3500)
 
     }
 
+
     currentPosition() {
         navigator.geolocation.getCurrentPosition(data => { this.setState({ data: data.coords, lat: data.coords.latitude, long: data.coords.longitude }) })
     }
+
 
     goHome(event) {
         event.preventDefault();
         this.setState({ check: 'home' })
     }
+
+
     // LONG AND ALT 
     static defaultProps = {
         center: {
@@ -112,6 +131,8 @@ class User extends Component {
         },
         zoom: 11
     };
+
+
     render() {
         if (this.state.check === 'home') {
             return (
@@ -187,7 +208,6 @@ class User extends Component {
                             // bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
                             defaultCenter={this.props.center}
                             defaultZoom={this.props.zoom}
-
                         >
                             {
                                 this.state.data && <AnyReactComponent
