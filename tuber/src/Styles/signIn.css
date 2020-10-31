@@ -1,8 +1,12 @@
 .signin{
     width:95vw;
+    
 }
 .registration1{
     text-align: center;
+    text-align: -webkit-center;
+    border-radius: 1em;
+    padding-top: 1em;
 }
 .inputEmail {
     display: block;
@@ -10,18 +14,37 @@
     left: 50%;
     transform: translate(-50%);
     margin-top: 3vh;
+    text-align: -webkit-center;
+    border-radius: 1em;
+    padding-top: 1em;
 }
 .button{
-    display: block;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 3vh;
-    cursor: pointer;
+    padding: .35rem 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: rgb(255, 150, 26);
+    background-color: black;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    width: 5rem;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 9px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 0.5em;
 }
 .inputPassword{
     position: relative;
     left: 50%;
     transform: translate(-50%);
     margin-top: 3vh;
+    border-radius: 1em;
+    padding-top: 1em;
+    text-align: -webkit-center;
 }

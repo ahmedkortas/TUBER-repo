@@ -78,3 +78,45 @@
     top: 20px
 
 }
+button{
+    padding: .35rem 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: rgb(255, 150, 26);
+    background-color: black;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    width: 5rem;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 9px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 0.5em;
+}
+.footer {
+        margin-top: 1rem;
+        padding: 1rem;
+        position: absolute;
+        bottom: -20em;
+        width: 100vw;
+        text-align: -webkit-auto;
+        opacity: 0.6;
+        color: currentColor;
+        text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+    }
+
+    a:link, a:visited {
+        color: wheat;
+        text-decoration: underline;
+        cursor: auto;
+      }
+      
+      a:link:active, a:visited:active {
+        color: currentColor;
+      }

@@ -4,25 +4,44 @@
     position: relative;
     top: 5vh;
     left:2vw;
+    border-top: double;
+    border: solid;
+    border-top-width: revert;
+    border-left-width: thin;
 }
 .button{
-    display: block;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 3vh;
-    cursor: pointer;
+   padding: .35rem 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: rgb(255, 150, 26);
+    background-color: black;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    width: 5rem;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 9px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 0.5em;
 }
 .line{
-    background-image: linear-gradient(to right, orange , red);
+    background-image: linear-gradient(to right, red, orange);
     width:80vw;
     position:relative;
 }
 .list{
     list-style: none;
     position: relative;
+    color: whitesmoke;
+    left:-0.5em;
 }
 .listStyle{
     position: relative;
-    left: 42vw;
+    left: 20vw;
 }

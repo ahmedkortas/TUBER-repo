@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import axios from 'axios';
+
 import '../Styles/informations.css'
 
 
+
 const AnyReactComponent = ({ text }) => <div ><img src="https://jillyscarwash.com/wp-content/uploads/2018/09/jillys-marker-map-pin-300x300.png" alt="logo" width='30px' height='30px'/>{text}</div>;
+
 
 class Informations extends Component {
     constructor(props) {
@@ -18,8 +21,8 @@ class Informations extends Component {
             requests: [],
             lat: 36.88563,
             long: 10.1840075,
-            display: {name: '', long: null, lat: null},
-            Userdisplay: {name: 'Me', long: null, lat: null}
+            display: { name: '', long: null, lat: null },
+            Userdisplay: { name: 'Me', long: null, lat: null }
         }
 
         this.currentPosition = this.currentPosition.bind(this);
@@ -39,6 +42,7 @@ class Informations extends Component {
     }
 
 
+
     boucle(i=0){
       setTimeout(() => {
              if(i === 0){ 
@@ -52,6 +56,7 @@ class Informations extends Component {
                   this.boucle(0)
               }
       }, 200);
+
     }
 
 
@@ -59,7 +64,7 @@ class Informations extends Component {
         const emailPicker = this.props.email
         axios.post('http://localhost:5000/drivers/requests/answer', { email: emailPicker })
             .then(res => { this.setState({ requests: res.data }) })
-            this.boucle(0)
+        this.boucle(0)
     }
 
 
@@ -82,7 +87,7 @@ class Informations extends Component {
                     this.setState({ status: info })
                 }
             })
-           this.setState({Userdisplay : {name: 'Me', long: this.state.long, lat: this.state.lat}})
+        this.setState({ Userdisplay: { name: 'Me', long: this.state.long, lat: this.state.lat } })
     }
 
 

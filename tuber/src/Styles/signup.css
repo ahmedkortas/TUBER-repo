@@ -1,5 +1,6 @@
 .signin{
     width:95vw;
+    color:white
 }
 .registration{
     text-align: center;
@@ -10,15 +11,17 @@
 .button{
     display: block;
     position: relative;
-    left: 50%;
+    left: 48%;
     transform: translate(-50%);
-    cursor: pointer;
+    margin-top: 3vh;
 }
-.field{
-    background-color: red;
-}
+
 .dezz{
     position: relative;
-    left: 2vw
+    left: 9vw;
+    width: 22vw;
+    text-align: -webkit-center;
+    padding-top: 1em;
+    border-radius: 1em;
 }
 
