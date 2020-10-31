@@ -1,0 +1,27 @@
+.signin{
+    width:95vw;
+    color:white
+}
+.registration{
+    text-align: center;
+}
+/* .field{
+    background-color: red;
+} */
+.button{
+    display: block;
+    position: relative;
+    left: 48%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+}
+
+.dezz{
+    position: relative;
+    left: 9vw;
+    width: 22vw;
+    text-align: -webkit-center;
+    padding-top: 1em;
+    border-radius: 1em;
+}
+

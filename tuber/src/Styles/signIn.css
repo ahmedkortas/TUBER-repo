@@ -1,34 +1,50 @@
-.registration1{
-    text-align: center;
-    margin-left: -415px;
-}
-.button{
-    position: relative;
-    left: -203px;
-    top: 82px;
-}
-.inputs{
-    position: relative;
-    margin-left: 21px;
-    display: block;
+.signin{
+    width:95vw;
     
 }
-.inputEmail{
+.registration1{
+    text-align: center;
+    text-align: -webkit-center;
+    border-radius: 1em;
+    padding-top: 1em;
+}
+.inputEmail {
+    display: block;
     position: relative;
-    left: 89px;
-    background: rgba(236, 235, 235,0.2);
-    border: 2px solid rgb(236, 235, 235);
-    border-radius: 5px;
-    background-color: #100e17;
-    color: rgb(236, 235, 235);
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+    text-align: -webkit-center;
+    border-radius: 1em;
+    padding-top: 1em;
+}
+.button{
+    padding: .35rem 0;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -moz-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    text-align: center;
+    color: rgb(255, 150, 26);
+    background-color: black;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    -moz-box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    box-shadow: 0 1px 0 rgba(0,0,0,.45);
+    width: 5rem;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 9px;
+    font-weight: bold;
+    box-sizing: border-box;
+    border-radius: 0.5em;
 }
 .inputPassword{
     position: relative;
-    left: -88px;
-    top: 39px;
-    background: rgba(236, 235, 235,0.2);
-    border: 2px solid rgb(236, 235, 235);
-    border-radius: 5px;
-    background-color: #100e17;
-    color: rgb(236, 235, 235);
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 3vh;
+    border-radius: 1em;
+    padding-top: 1em;
+    text-align: -webkit-center;
 }
