@@ -64,7 +64,7 @@ class User extends Component {
         const {lat,long} = this.state;
         const filtered = this.props.drivers.filter(driver => { return (driver.location.toLowerCase() === e.target.value) });
         this.setState({ currentDrivers: filtered , name: '', end: !this.state.end,dr: { lat: null, long: null , name: ''}})
-        console.log(filtered)
+        console.log(lat,long)
         let arr = []
         for(let i =0; i<filtered.length; i++){
             arr = arr.concat({name:filtered[i].firstName,lat:filtered[i].latt,long:filtered[i].longi})
@@ -90,7 +90,7 @@ class User extends Component {
                      if(i === (arr.length )){
                         this.setState({dr: { lat: this.state.lat, long: this.state.long , name: 'Me'}})
                          this.boucle(arr,i=0)
-             }}, 200);
+             }}, 2000);
     }
 
 
